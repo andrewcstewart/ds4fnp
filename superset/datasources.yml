@@ -3,7 +3,7 @@ databases:
   extra: "{\r\n    \"metadata_params\": {},\r\n    \"engine_params\": {},\r\n    \"\
     metadata_cache_timeout\": {},\r\n    \"schemas_allowed_for_csv_upload\": []\r\n\
     }"
-  sqlalchemy_uri: postgresql+psycopg2://ds4fnp:XXXXXXXXXX@localhost:5432/ds4fnp
+  sqlalchemy_uri: postgresql+psycopg2://ds4fnp:ds4fnp@localhost:5432/ds4fnp
   tables:
   - columns:
     - column_name: year
