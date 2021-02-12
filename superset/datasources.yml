@@ -1,0 +1,39 @@
+databases:
+- database_name: ds4fnp
+  extra: "{\r\n    \"metadata_params\": {},\r\n    \"engine_params\": {},\r\n    \"\
+    metadata_cache_timeout\": {},\r\n    \"schemas_allowed_for_csv_upload\": []\r\n\
+    }"
+  sqlalchemy_uri: postgresql+psycopg2://ds4fnp:XXXXXXXXXX@localhost:5432/ds4fnp
+  tables:
+  - columns:
+    - column_name: year
+      is_dttm: true
+      type: DATE
+    - column_name: seats
+      type: BIGINT
+    - column_name: party
+      type: TEXT
+    main_dttm_col: year
+    metrics:
+    - expression: COUNT(*)
+      metric_name: count
+      metric_type: count
+      verbose_name: COUNT(*)
+    schema: dbt_elections
+    table_name: us_senate_party_seats
+  - columns:
+    - column_name: year
+      is_dttm: true
+      type: DATE
+    - column_name: seats
+      type: BIGINT
+    - column_name: party
+      type: TEXT
+    main_dttm_col: year
+    metrics:
+    - expression: COUNT(*)
+      metric_name: count
+      metric_type: count
+      verbose_name: COUNT(*)
+    schema: dbt_elections
+    table_name: us_house_party_seats

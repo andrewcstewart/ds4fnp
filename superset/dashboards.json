@@ -1,0 +1,280 @@
+{
+    "dashboards": [
+        {
+            "__Dashboard__": {
+                "css": "",
+                "dashboard_title": "US Election History",
+                "description": null,
+                "json_metadata": "{\"timed_refresh_immune_slices\": [], \"expanded_slices\": {}, \"refresh_frequency\": 0, \"default_filters\": \"{}\", \"color_scheme\": null, \"remote_id\": 1}",
+                "position_json": "{\"CHART-EQwPWUzCO3\":{\"children\":[],\"id\":\"CHART-EQwPWUzCO3\",\"meta\":{\"chartId\":1,\"height\":50,\"sliceName\":\"US House results by party\",\"uuid\":\"0705a951-625f-4c8a-b39c-2389d69fede1\",\"width\":4},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-MIndUhhg5C\",\"COLUMN-K2EpgILr7U\"],\"type\":\"CHART\"},\"CHART-Fz6oFa_iyr\":{\"children\":[],\"id\":\"CHART-Fz6oFa_iyr\",\"meta\":{\"chartId\":2,\"height\":50,\"sliceName\":\"US Senate results by party\",\"uuid\":\"24c3db4b-839b-4563-812e-afce574875e4\",\"width\":4},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-MIndUhhg5C\"],\"type\":\"CHART\"},\"COLUMN-K2EpgILr7U\":{\"children\":[\"CHART-EQwPWUzCO3\"],\"id\":\"COLUMN-K2EpgILr7U\",\"meta\":{\"background\":\"BACKGROUND_TRANSPARENT\",\"width\":4},\"parents\":[\"ROOT_ID\",\"GRID_ID\",\"ROW-MIndUhhg5C\"],\"type\":\"COLUMN\"},\"DASHBOARD_VERSION_KEY\":\"v2\",\"GRID_ID\":{\"children\":[\"ROW-MIndUhhg5C\"],\"id\":\"GRID_ID\",\"parents\":[\"ROOT_ID\"],\"type\":\"GRID\"},\"HEADER_ID\":{\"id\":\"HEADER_ID\",\"meta\":{\"text\":\"US Election History\"},\"type\":\"HEADER\"},\"ROOT_ID\":{\"children\":[\"GRID_ID\"],\"id\":\"ROOT_ID\",\"type\":\"ROOT\"},\"ROW-MIndUhhg5C\":{\"children\":[\"COLUMN-K2EpgILr7U\",\"CHART-Fz6oFa_iyr\"],\"id\":\"ROW-MIndUhhg5C\",\"meta\":{\"background\":\"BACKGROUND_TRANSPARENT\"},\"parents\":[\"ROOT_ID\",\"GRID_ID\"],\"type\":\"ROW\"}}",
+                "slices": [
+                    {
+                        "__Slice__": {
+                            "cache_timeout": null,
+                            "datasource_name": "dbt_elections.us_house_party_seats",
+                            "datasource_type": "table",
+                            "id": 1,
+                            "params": "{\"adhoc_filters\": [], \"annotation_layers\": [], \"bottom_margin\": \"auto\", \"color_scheme\": \"googleCategory10c\", \"comparison_type\": \"values\", \"datasource\": \"7__table\", \"granularity_sqla\": \"year\", \"groupby\": [\"party\"], \"label_colors\": {}, \"line_interpolation\": \"linear\", \"metrics\": [{\"aggregate\": \"SUM\", \"column\": {\"column_name\": \"seats\", \"description\": null, \"expression\": null, \"filterable\": true, \"groupby\": true, \"id\": 77, \"is_dttm\": false, \"python_date_format\": null, \"type\": \"BIGINT\", \"verbose_name\": null}, \"expressionType\": \"SIMPLE\", \"hasCustomLabel\": false, \"isNew\": false, \"label\": \"SUM(seats)\", \"optionName\": \"metric_5ojlqtsfc6_7469su80asq\", \"sqlExpression\": null}], \"order_desc\": true, \"rich_tooltip\": true, \"rolling_type\": \"None\", \"row_limit\": 10000, \"show_brush\": \"auto\", \"show_controls\": false, \"show_legend\": true, \"stacked_style\": \"stack\", \"time_grain_sqla\": \"P1Y\", \"time_range\": \"No filter\", \"time_range_endpoints\": [\"inclusive\", \"exclusive\"], \"url_params\": {}, \"viz_type\": \"area\", \"x_axis_format\": \"smart_date\", \"x_ticks_layout\": \"auto\", \"y_axis_bounds\": [null, null], \"y_axis_format\": \"SMART_NUMBER\", \"remote_id\": 1, \"datasource_name\": \"us_house_party_seats\", \"schema\": \"dbt_elections\", \"database_name\": \"ds4fnp\"}",
+                            "slice_name": "US House results by party",
+                            "viz_type": "area"
+                        }
+                    },
+                    {
+                        "__Slice__": {
+                            "cache_timeout": null,
+                            "datasource_name": "dbt_elections.us_senate_party_seats",
+                            "datasource_type": "table",
+                            "id": 2,
+                            "params": "{\"adhoc_filters\": [], \"annotation_layers\": [], \"bottom_margin\": \"auto\", \"color_scheme\": \"googleCategory10c\", \"comparison_type\": \"values\", \"datasource\": \"8__table\", \"granularity_sqla\": \"year\", \"groupby\": [\"party\"], \"label_colors\": {}, \"line_interpolation\": \"linear\", \"metrics\": [{\"aggregate\": \"SUM\", \"column\": {\"column_name\": \"seats\", \"description\": null, \"expression\": null, \"filterable\": true, \"groupby\": true, \"id\": 80, \"is_dttm\": false, \"python_date_format\": null, \"type\": \"BIGINT\", \"verbose_name\": null}, \"expressionType\": \"SIMPLE\", \"hasCustomLabel\": false, \"isNew\": false, \"label\": \"SUM(seats)\", \"optionName\": \"metric_yzpbv2vtra8_samx4qoxln\", \"sqlExpression\": null}], \"order_desc\": true, \"rich_tooltip\": true, \"rolling_type\": \"None\", \"row_limit\": 10000, \"show_brush\": \"auto\", \"show_legend\": true, \"stacked_style\": \"stack\", \"time_grain_sqla\": \"P1Y\", \"time_range\": \"No filter\", \"time_range_endpoints\": [\"inclusive\", \"exclusive\"], \"url_params\": {}, \"viz_type\": \"area\", \"x_axis_format\": \"smart_date\", \"x_ticks_layout\": \"auto\", \"y_axis_bounds\": [null, null], \"y_axis_format\": \"SMART_NUMBER\", \"remote_id\": 2, \"datasource_name\": \"us_senate_party_seats\", \"schema\": \"dbt_elections\", \"database_name\": \"ds4fnp\"}",
+                            "slice_name": "US Senate results by party",
+                            "viz_type": "area"
+                        }
+                    }
+                ],
+                "slug": null
+            }
+        }
+    ],
+    "datasources": [
+        {
+            "__SqlaTable__": {
+                "cache_timeout": null,
+                "columns": [
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 2,
+                            "changed_on": {
+                                "__datetime__": "2021-02-08T22:31:16"
+                            },
+                            "column_name": "year",
+                            "created_by_fk": 2,
+                            "created_on": {
+                                "__datetime__": "2021-02-08T22:31:16"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 78,
+                            "is_active": true,
+                            "is_dttm": true,
+                            "python_date_format": null,
+                            "table_id": 8,
+                            "type": "DATE",
+                            "uuid": "0224ee94-36dc-46bb-b35f-9ab8cc00549d",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 2,
+                            "changed_on": {
+                                "__datetime__": "2021-02-08T22:31:16"
+                            },
+                            "column_name": "party",
+                            "created_by_fk": 2,
+                            "created_on": {
+                                "__datetime__": "2021-02-08T22:31:16"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 79,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 8,
+                            "type": "TEXT",
+                            "uuid": "d75de79e-147c-43ec-990f-21340fa43cb1",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 2,
+                            "changed_on": {
+                                "__datetime__": "2021-02-08T22:31:16"
+                            },
+                            "column_name": "seats",
+                            "created_by_fk": 2,
+                            "created_on": {
+                                "__datetime__": "2021-02-08T22:31:16"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 80,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 8,
+                            "type": "BIGINT",
+                            "uuid": "dd541b47-b15b-4882-a118-cdcf4cdedae0",
+                            "verbose_name": null
+                        }
+                    }
+                ],
+                "database_id": 1,
+                "default_endpoint": null,
+                "description": null,
+                "extra": null,
+                "fetch_values_predicate": null,
+                "filter_select_enabled": false,
+                "main_dttm_col": "year",
+                "metrics": [
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 2,
+                            "changed_on": {
+                                "__datetime__": "2021-02-08T22:31:17"
+                            },
+                            "created_by_fk": 2,
+                            "created_on": {
+                                "__datetime__": "2021-02-08T22:31:17"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "COUNT(*)",
+                            "extra": null,
+                            "id": 8,
+                            "metric_name": "count",
+                            "metric_type": "count",
+                            "table_id": 8,
+                            "uuid": "99cdec93-03f9-4a3e-b32c-48c10de30eab",
+                            "verbose_name": "COUNT(*)",
+                            "warning_text": null
+                        }
+                    }
+                ],
+                "offset": 0,
+                "params": "{\"remote_id\": 8, \"database_name\": \"ds4fnp\"}",
+                "schema": "dbt_elections",
+                "sql": null,
+                "table_name": "us_senate_party_seats",
+                "template_params": null
+            }
+        },
+        {
+            "__SqlaTable__": {
+                "cache_timeout": null,
+                "columns": [
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 2,
+                            "changed_on": {
+                                "__datetime__": "2021-02-08T22:16:30"
+                            },
+                            "column_name": "year",
+                            "created_by_fk": 2,
+                            "created_on": {
+                                "__datetime__": "2021-02-08T22:16:30"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 75,
+                            "is_active": true,
+                            "is_dttm": true,
+                            "python_date_format": null,
+                            "table_id": 7,
+                            "type": "DATE",
+                            "uuid": "b467bad1-960e-4e70-bdaf-d4a7dfaa65b1",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 2,
+                            "changed_on": {
+                                "__datetime__": "2021-02-08T22:16:30"
+                            },
+                            "column_name": "party",
+                            "created_by_fk": 2,
+                            "created_on": {
+                                "__datetime__": "2021-02-08T22:16:30"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 76,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 7,
+                            "type": "TEXT",
+                            "uuid": "c69022ac-2886-43fe-877a-d866fcd206b7",
+                            "verbose_name": null
+                        }
+                    },
+                    {
+                        "__TableColumn__": {
+                            "changed_by_fk": 2,
+                            "changed_on": {
+                                "__datetime__": "2021-02-08T22:16:30"
+                            },
+                            "column_name": "seats",
+                            "created_by_fk": 2,
+                            "created_on": {
+                                "__datetime__": "2021-02-08T22:16:30"
+                            },
+                            "description": null,
+                            "expression": null,
+                            "filterable": true,
+                            "groupby": true,
+                            "id": 77,
+                            "is_active": true,
+                            "is_dttm": false,
+                            "python_date_format": null,
+                            "table_id": 7,
+                            "type": "BIGINT",
+                            "uuid": "e22c614b-7192-47eb-8e6f-e135aa150a05",
+                            "verbose_name": null
+                        }
+                    }
+                ],
+                "database_id": 1,
+                "default_endpoint": null,
+                "description": null,
+                "extra": null,
+                "fetch_values_predicate": null,
+                "filter_select_enabled": false,
+                "main_dttm_col": "year",
+                "metrics": [
+                    {
+                        "__SqlMetric__": {
+                            "changed_by_fk": 2,
+                            "changed_on": {
+                                "__datetime__": "2021-02-08T22:16:30"
+                            },
+                            "created_by_fk": 2,
+                            "created_on": {
+                                "__datetime__": "2021-02-08T22:16:30"
+                            },
+                            "d3format": null,
+                            "description": null,
+                            "expression": "COUNT(*)",
+                            "extra": null,
+                            "id": 7,
+                            "metric_name": "count",
+                            "metric_type": "count",
+                            "table_id": 7,
+                            "uuid": "f299ed9e-b0a7-4d3b-a500-4a3b711a0c26",
+                            "verbose_name": "COUNT(*)",
+                            "warning_text": null
+                        }
+                    }
+                ],
+                "offset": 0,
+                "params": "{\"remote_id\": 7, \"database_name\": \"ds4fnp\"}",
+                "schema": "dbt_elections",
+                "sql": null,
+                "table_name": "us_house_party_seats",
+                "template_params": null
+            }
+        }
+    ]
+}
