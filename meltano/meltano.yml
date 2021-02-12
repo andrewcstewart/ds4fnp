@@ -1,3 +1,99 @@
 version: 1
 send_anonymous_usage_stats: true
 project_id: 8e686943-4e2d-4fb7-a59e-532ae904da20
+plugins:
+  extractors:
+  - name: tap-spreadsheets-anywhere
+    variant: original
+    pip_url: git+https://github.com/ets/tap-spreadsheets-anywhere.git
+    capabilities:
+    - catalog
+    - discover
+    - state
+    config:
+      tables:
+      # - path: http://www.parlgov.org/
+      #   name: parlgov__view_election
+      #   pattern: static/data/development-utf-8/view_election.csv
+      #   start_date: '2020-01-01T00:00:00Z'
+      #   key_properties: []
+      #   format: csv
+      # - path: http://www.parlgov.org/
+      #   name: parlgov__view_cabinet
+      #   pattern: static/data/development-utf-8/view_cabinet.csv
+      #   start_date: '2020-01-01T00:00:00Z'
+      #   key_properties: []
+      #   format: csv        
+      - path: http://www.parlgov.org/
+        name: parlgov__view_party
+        pattern: static/data/development-utf-8/view_party.csv
+        start_date: '2020-01-01T00:00:00Z'
+        key_properties: []
+        format: csv
+      - path: https://dataverse.harvard.edu/api/access/datafile/
+        name: mit__house_elections
+        pattern: "4202836"
+        start_date: '2010-01-01T00:00:00Z'
+        key_properties: []
+        format: csv
+        delimiter: "\t"
+      - path: https://dataverse.harvard.edu/api/access/datafile/
+        name: mit__senate_elections
+        pattern: "3440424"
+        start_date: '2010-01-01T00:00:00Z'
+        key_properties: []
+        format: csv
+        delimiter: "\t"
+      - path: https://dataverse.harvard.edu/api/access/datafile/
+        name: mit__president_elections
+        pattern: "3444051"
+        start_date: '2010-01-01T00:00:00Z'
+        key_properties: []
+        format: csv
+        delimiter: "\t"
+  - name: tap-csv
+    variant: meltano
+    pip_url: git+https://gitlab.com/meltano/tap-csv.git
+    config:
+      files:
+        - entity: kgl__governors_county_candidate
+          file: ../data/kaggle/governors_county_candidate.csv
+          keys: []
+        - entity: kgl__governors_county
+          file: ../data/kaggle/governors_county.csv
+          keys: []
+        - entity: kgl__governors_state
+          file: ../data/kaggle/governors_state.csv
+          keys: []
+        - entity: kgl__house_candidates
+          file: ../data/kaggle/house_candidates.csv
+          keys: []
+        - entity: kgl__house_state
+          file: ../data/kaggle/house_state.csv
+          keys: []
+        - entity: kgl__president_county_candidate
+          file: ../data/kaggle/president_county_candidate.csv
+          keys: []
+        - entity: kgl__president_county
+          file: ../data/kaggle/president_county.csv
+          keys: []
+        - entity: kgl__president_state
+          file: ../data/kaggle/president_state.csv
+          keys: []
+        - entity: kgl__senate_county_candidate
+          file: ../data/kaggle/senate_county_candidate.csv
+          keys: []
+        - entity: kgl__senate_county
+          file: ../data/kaggle/senate_county.csv
+          keys: []
+        - entity: kgl__senate_state
+          file: ../data/kaggle/senate_state.csv
+          keys: []
+  loaders:
+  - name: target-postgres
+    pip_url: git+https://github.com/meltano/target-postgres.git
+    config:
+      user: ds4fnp
+      host: 127.0.0.1
+      port: 5432
+      dbname: ds4fnp
