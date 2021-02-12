@@ -1,0 +1,58 @@
+version: 2
+
+sources:
+  - name: mit
+    loader: meltano
+    database: ds4fnp
+    schema: tap_spreadsheets_anywhere
+    tables:
+      - name: mit__house_elections
+        description: MIT house election data
+      - name: mit__senate_elections
+        description: MIT senate election data
+      - name: mit__president_elections
+        description: The data file `1976-2016-president` contains constituency (state-level) returns for elections to the U.S. presidency from 1976 to 2016.  The data source is the document "[Statistics of the Congressional Election](http://history.house.gov/Institution/Election-Statistics/Election-Statistics/)," published biennially by the Clerk of the U.S. House of Representatives.
+        columns:
+          - name: candidate
+            description: name of the candidate 
+          - name: candidatevotes
+            description: votes received by this candidate for this particular party
+          - name: district
+            description: None
+          - name: mode
+            description: None
+          - name: office
+            description: U.S. President
+          - name: party
+            description: party of the candidate (always entirely lowercase)
+          - name: special
+            description: None
+          - name: stage
+            description: None
+          - name: state
+            description: state name
+          - name: state_cen
+            description: U.S. Census state code
+          - name: state_fips
+            description: State FIPS code
+          - name: state_ic
+            description: ICPSR state code
+          - name: state_po
+            description: U.S. postal code state abbreviation
+          - name: totalvotes
+            description: total number of votes cast for this election
+          - name: unofficial
+            description: None
+          - name: version
+            description: None
+          - name: writein
+            description: vote totals associated with write-in candidates
+          - name: year
+            description: year in which election was held
+models:
+  - name: stg_us_house_election_results
+    description: US House election results
+  - name: stg_us_senate_election_results
+    description: US Senate election results
+  - name: stg_us_president_election_results
+    description: US President election results

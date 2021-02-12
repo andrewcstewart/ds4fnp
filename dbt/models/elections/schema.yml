@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: us_house_party_seats
+    description: Seats in the US House of Representatives by party.
+  - name: us_senate_party_seats
+    description: Seats in the US Senate by party.
+  - name: us_president_popular_vote
+    description: Popular vote in US presidential elections by party.
