@@ -6,17 +6,17 @@ Data Stacks For Fun & Nonprofits is a series of articles and tutorials aimed tow
 
 In a [previous article](https://towardsdatascience.com/data-stacks-for-fun-nonprofit-part-ii-d375d824abf3), we settled on an initial locally deployable stack composed from Postgres, Meltano, Airflow, dbt, and Superset.  The Postgres database can be swapped out for other database engines such as SQLite and MySQL with few significant implications.  This setup allows us to work with a full data stack in a local environment, and then when we are ready to scale to a cloud hosted data warehouse like BigQuery or Snowflake, doing so is a simple matter of switching some configuration files.
 
-We're now ready for a hands-on tutorial demonstrating how to setup each component of the stack and some example content.  We're going to 
+We're now ready for a hands-on tutorial demonstrating how to setup each component of the stack and some example content.  We're going to walk through the setup of each component in the stack, extract and load data into a data warehouse (ok, really just a local database for now), and design some basic analytics dashboards.
 
 ## Finding some data!
 
 Before we get started, we need to come up with some kind of purpose or scenario to motivate our selection of data sources and objectives.  This is always the most difficult part of designing tutorials for such diverse potential use cases, as you want to try to present something relevant to all cases.  I think that an ideal scenario would be one that involves continuously generated data, such as sports statistics or server logs, as these would allow us to think in terms of regularly scheduled workflows and longitudinal plots.  However, in the interest of learning to walk before we run, let's save those scenarios for a future tutorial and for now focus on some slower moving data.
 
-The past few months have been occcupied with news about the 2020 US Elections, and we're finalized returns are now being made available from the usual sources, so this seems like a timely and suitable theme to go with.  From an analytical perspective, let's set our interests on comparing recent and historical election results.
+The past few months have been occupied with news about the 2020 US Elections, and we're finalized returns are now being made available from the usual sources, so this seems like a timely and suitable theme to go with.  From an analytical perspective, let's set our interests on comparing recent and historical election results.
 
 Perhaps unsurprisingly, it turns out that data on US elections is incredibly decentralized, not always obvious where to find or how to access, and lacking any kind of common standards.  There are a few public institutions and academic researchers who bravely collect and publish some datasets, many of which I have begun to catalog and curate at https://github.com/andrewcstewart/awesome-democracy-data.  If you are interested in data related to elections, electoral reforms, and democratic political systems, I encourage you to take a look!
 
-The primary data souce we will use for this tutorial is from the [MIT Election Data + Science Lab](https://electionlab.mit.edu/data).  Specifically, we are interested in collecting historical US elections results for the House of Representatives, the Senate, and Presidential candidates in the Electoral College.
+The primary data source we will use for this tutorial is from the [MIT Election Data + Science Lab](https://electionlab.mit.edu/data).  Specifically, we are interested in collecting historical US elections results for the House of Representatives, the Senate, and Presidential candidates in the Electoral College.
 
 
 ## Collecting data with Meltano
@@ -37,7 +37,7 @@ python3 -m venv .venv       # create your virtual environment
 source .venv/bin/activate   # activate your virtual environment
 ```
 
-We're going to use Meltano to manage our ELT (not ETL!) pipelines, each of which will extract data from some source and load that data into a target database.  If we were rolling our own ETL solution by hand, we would probably be writing an awful lot of custom python code for each data extraction and loading process, but fortunately the open-source [Singer](https://www.singer.io/) standard composes these processes into interchangable sets of "taps" (data sources) and "targets" (load destinations).  Meltano helps abstract away much of the configuration details, and provides a convenient execution layer.  Meltano can also handle the downstream transformation (via dbt) and orchestration (via Airflow) steps, making it convenient top-level controller for your entire project, however for illustrative purposes we're going to only use Meltano for the extraction and loading steps.
+We're going to use Meltano to manage our ELT (not ETL!) pipelines, each of which will extract data from some source and load that data into a target database.  If we were rolling our own ETL solution by hand, we would probably be writing an awful lot of custom python code for each data extraction and loading process, but fortunately the open-source [Singer](https://www.singer.io/) standard composes these processes into interchangeable sets of "taps" (data sources) and "targets" (load destinations).  Meltano helps abstract away much of the configuration details, and provides a convenient execution layer.  Meltano can also handle the downstream transformation (via dbt) and orchestration (via Airflow) steps, making it convenient top-level controller for your entire project, however for illustrative purposes we're going to only use Meltano for the extraction and loading steps.
 
 ### Setting up Meltano
 
@@ -67,7 +67,7 @@ To demonstrate, we will add URLs for three datasets from the MIT Dataverse for t
 - US Senate elections: https://dataverse.harvard.edu/api/access/datafile/3440424
 - US Presidential elections: https://dataverse.harvard.edu/api/access/datafile/3444051
 
-Each of these URLs resolves to a tab-delimitted file, so we will tell the tap to expect a "csv" file but with the "\t" delimiter.  We end up with our `meltano.yml` looking something like this:
+Each of these URLs resolves to a tab-delimited file, so we will tell the tap to expect a "csv" file but with the "\t" delimiter.  We end up with our `meltano.yml` looking something like this:
 
 ```yaml
 version: 1
@@ -109,7 +109,7 @@ plugins:
 
 ### Configuring targets for loading
 
-Next we need to add a Singer target to tell Meltano about the Postgres database we want it to load the data into.  Before we do that though we need to create a databse and permissions in Postgres.  For the purpose of this tutorial, we'll just create a db with the name "ds4fnp", along with an identically named user.  
+Next we need to add a Singer target to tell Meltano about the Postgres database we want it to load the data into.  Before we do that though we need to create a database and permissions in Postgres.  For the purpose of this tutorial, we'll just create a db with the name "ds4fnp", along with an identically named user.  
 
 ```
 create database ds4fnp;
@@ -163,7 +163,7 @@ Great!  We now have some raw data loaded into our database.  We call this "raw" 
 - There are lots of metadata fields that we probably don't care about during analysis.  We can filter these out.
 - These election results are at a very low level of granularity, whereas we probably want to work with numbers aggregated at some higher level.
 
-However, we're going to handle transformations in the next step.  There is actually value in maintaining our raw data as originally loaded, and treating transformations as derivatives of that raw data.  Doing so helps us preserve the [provenance](https://en.wikipedia.org/wiki/Data_lineage#Data_provenance) of the data, an auditible historical record of the data in its purest collected form.  It also allows us to revisit and modify our transformation tasks, which we could not do if we did not preserve the original raw data.
+However, we're going to handle transformations in the next step.  There is actually value in maintaining our raw data as originally loaded, and treating transformations as derivatives of that raw data.  Doing so helps us preserve the [provenance](https://en.wikipedia.org/wiki/Data_lineage#Data_provenance) of the data, an auditable historical record of the data in its purest collected form.  It also allows us to revisit and modify our transformation tasks, which we could not do if we did not preserve the original raw data.
 
 As I mentioned earlier, Meltano can actually incorporate dbt as a transformation layer in its own project configurations, but for now we're going to step through dbt ourselves.
 
@@ -186,7 +186,7 @@ cd dbt                  #
 We now have a fresh project skeleton, including several subdirectories and a `dbt_project.yml` config file which is analogous to the the `meltano.yml` config file.  Very briefly, a dbt project consists of the following components:
 
 - **sources** are references to existing locations in our data warehouse where our loading processes deposit raw data.  These are defined under the `models` directory.
-- **models** are templated queries which define selections and transformations that dbt will materialize as new tables/views in our datawarehouse.  Models may select from sources, or from other models.  These are also defined under the `models` directory.
+- **models** are templated queries which define selections and transformations that dbt will materialize as new tables/views in our data warehouse.  Models may select from sources, or from other models.  These are also defined under the `models` directory.
 - **`data`** is a directory that contains flat files in CSV format that dbt will automatically load into our data warehouse; this is useful for small immutable lookup tables.
 - **`macros`** contains functions which can be used by the templating engine when defining queries.  We won't get into macros too much here, but they provide the real power behind dbt.
 - **`analysis`** queries are similar to models except that dbt only compiles them into rendered SQL without executing them on the data warehouse.  I find these useful for testing new ideas for queries without incorporating them into my overall data model, as well as pre-generating queries that can be used in downstream analyses and by BI platforms.
@@ -334,11 +334,11 @@ where writein::BOOLEAN is False
 
 As we can see from this staging model, the templated SQL in dbt mostly resembles regular SQL, except that we use a `{{ source() }}` macro in the `from` clause of the query.  When dbt runs, it will populate the macro with the appropriate information from the project configuration.  In this staging model, we are basically selecting the source table as-is, except that we limit the fields returned and perform some transformations to a few of them.  For example:
 
-- We have converted the `date` field to an actual datestamp type.
+- We have converted the `date` field to an actual date stamp type.
 - We have corrected the all-caps strings in many fields with the `INITCAP()` function.
 - We have interpolated some missing values in the `district` column.
 
-Just to name a few.  We then repeat this for the Senate and President election data sources.  Now that we have defined our sources and staging models, we can begin designing the data models we plan to use in our future analyses and in Superset.  Wheres the raw data provides election results for every single candidate (including write-ins, minor praties, etc) and each state/district, let's work towards summarizing the results at the party level.  For these models we will create a new schema under `models/elections/schema.yml`:
+Just to name a few.  We then repeat this for the Senate and President election data sources.  Now that we have defined our sources and staging models, we can begin designing the data models we plan to use in our future analyses and in Superset.  Wheres the raw data provides election results for every single candidate (including write-ins, minor parties, etc) and each state/district, let's work towards summarizing the results at the party level.  For these models we will create a new schema under `models/elections/schema.yml`:
 
 ```yaml
 version: 2
@@ -412,14 +412,20 @@ Completed successfully
 Done. PASS=5 WARN=0 ERROR=0 SKIP=0 TOTAL=5
 ```
 
-Awesome, our project compiled and ran successfuly!  You can follow the progress as dbt runs and it will often provide informative diagnostics if something goes wrong.Before we peer into our data warehouse to see everything dbt generated, let's quickly go over generating dbt's docs.  We do this with just two more commands:
+Awesome, our project compiled and ran successfully!  You can follow the progress as dbt runs and it will often provide informative diagnostics if something goes wrong.Before we peer into our data warehouse to see everything dbt generated, let's quickly go over generating dbt's docs.  We do this with just two more commands:
 
 ```sh
 dbt docs generate
 dbt docs serve
 ```
 
-This will generate your data warehouse's documentation and spin up a temporary webserver so you can view it.  Take a minute to explore the generated site in your browser.  One of the great features with dbt is the graph on the right side of the site that allows you to visualize the relationships between your various views and tables.  Note that unlike ERD (Entity Relationship Diagrams) that you may have seen elsehwere, the relationships between tables here are of lineage; ie, which tables are the sources of other tables.  As projects grow in complexity, these diagrams and the autogenerated documentation in general can become highly valuable.
+This will generate your data warehouse's documentation and spin up a temporary webserver so you can view it.  Take a minute to explore the generated site in your browser.  
+
+![dbt-docs-sources](images/dbt-docs-sources.png)
+
+One of the great features with dbt is the graph on the right side of the site that allows you to visualize the relationships between your various views and tables.  Note that unlike ERD (Entity Relationship Diagrams) that you may have seen elsewhere, the relationships between tables here are of lineage; ie, which tables are the sources of other tables.  As projects grow in complexity, these diagrams and the auto-generated documentation in general can become highly valuable.
+
+![dbt-docs-lineage](images/dbt-docs-lineage.png)
 
 At this point you can also examine the tables you have generated in your local postgres data warehouse.  We will take a more directed look at them in the next section.
 
@@ -503,5 +509,5 @@ This looks like a pretty good start!  From here you can experiment with creating
 
 - [ ] CI/CD
 - [ ] deploying superset (Preset)
-- [ ] next: Airflow, extration, scraping
+- [ ] next: Airflow, extraction, scraping
 - [ ] next: 
