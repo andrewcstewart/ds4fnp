@@ -2,9 +2,9 @@
 
 In this tutorial we are going to walk through each step of the DS4FNP stack.
 
-Data Stacks For Fun & Nonprofits is a series of articles and tutorials aimed towards designing and implementing a modern data stack using open source and open core components.  The DS4FNP stack is intended to be accessible enough for education purposes (both in terms of costs and laptop-deployable), but suitably scalable as a mature analytics architecture for organizations of all sizes.
+Data Stacks For Fun & Nonprofits is a series of articles and tutorials aimed towards designing and implementing a modern data stack using open source and open core components.  The DS4FNP stack is intended to be accessible enough for education purposes (both in terms of costs and being laptop-deployable), but suitably scalable as a mature analytics architecture for organizations of all sizes.
 
-In a [previous article](https://towardsdatascience.com/data-stacks-for-fun-nonprofit-part-ii-d375d824abf3), we settled on an initial locally deployable stack composed from Postgres, Meltano, Airflow, dbt, and Superset.  The Postgres database can be swapped out for other database engines such as SQLite and MySQL with few significant implications.  This setup allows us to work with a full data stack in a local environment, and then when we are ready to scale to a cloud hosted data warehouse like BigQuery or Snowflake, doing so is a simple matter of switching some configuration files.
+In a [previous article](https://towardsdatascience.com/data-stacks-for-fun-nonprofit-part-ii-d375d824abf3), I described and outlined the rationale behind a locally deployable stack composed of Postgres, Meltano, Airflow, dbt, and Apache Superset.  The Postgres database can be swapped out for other database engines such as SQLite and MySQL with few significant implications.  This setup allows us to work with a full data stack in a local environment, and then when we are ready to scale to a cloud hosted data warehouse like BigQuery or Snowflake, doing so is a simple matter of switching some configuration files.
 
 We're now ready for a hands-on tutorial demonstrating how to setup each component of the stack and some example content.  We're going to walk through the setup of each component in the stack, extract and load data into a data warehouse (ok, really just a local database for now), and design some basic analytics dashboards.
 
@@ -12,7 +12,7 @@ We're now ready for a hands-on tutorial demonstrating how to setup each componen
 
 Before we get started, we need to come up with some kind of purpose or scenario to motivate our selection of data sources and objectives.  This is always the most difficult part of designing tutorials for such diverse potential use cases, as you want to try to present something relevant to all cases.  I think that an ideal scenario would be one that involves continuously generated data, such as sports statistics or server logs, as these would allow us to think in terms of regularly scheduled workflows and longitudinal plots.  However, in the interest of learning to walk before we run, let's save those scenarios for a future tutorial and for now focus on some slower moving data.
 
-The past few months have been occupied with news about the 2020 US Elections, and we're finalized returns are now being made available from the usual sources, so this seems like a timely and suitable theme to go with.  From an analytical perspective, let's set our interests on comparing recent and historical election results.
+The past few months have been occupied with news about the 2020 US Elections, and finalized returns are now being made available from the usual sources, so this seems like a timely and suitable theme to go with.  From an analytical perspective, let's set our interests on comparing recent and historical election results.
 
 Perhaps unsurprisingly, it turns out that data on US elections is incredibly decentralized, not always obvious where to find or how to access, and lacking any kind of common standards.  There are a few public institutions and academic researchers who bravely collect and publish some datasets, many of which I have begun to catalog and curate at https://github.com/andrewcstewart/awesome-democracy-data.  If you are interested in data related to elections, electoral reforms, and democratic political systems, I encourage you to take a look!
 
@@ -32,7 +32,7 @@ Let's begin!  If you just want to follow along, all the code/configuration gener
 
 ```sh
 mkdir ds4fnp
-cd ds4fnp                   # all paths will be relative to here
+cd ds4fnp                   
 python3 -m venv .venv       # create your virtual environment
 source .venv/bin/activate   # activate your virtual environment
 ```
@@ -93,14 +93,14 @@ plugins:
         delimiter: "\t"
       - path: https://dataverse.harvard.edu/api/access/datafile/
         name: mit__senate_elections
-        pattern: "3440424"
+        pattern: "4300300"
         start_date: '2010-01-01T00:00:00Z'
         key_properties: []
         format: csv
         delimiter: "\t"
       - path: https://dataverse.harvard.edu/api/access/datafile/
         name: mit__president_elections
-        pattern: "3444051"
+        pattern: "4299753"
         start_date: '2010-01-01T00:00:00Z'
         key_properties: []
         format: csv
@@ -488,7 +488,9 @@ I also changed the color scheme under Customize to "Google Category 10c", mostly
 
 ![superset-add-chart](images/superset-add-chart.png)
 
-Repeat this process to create similar charts for the Senate and President election results.
+Repeat this process to create similar charts for the Senate and President election results.  
+
+_Note: Yes, I realize that democrats are red and republicans are blue in the Presidential election chart.  To address this, we would probably want to create an additional standardized party field in our tables in order to control how groupings and orderings work._
 
 ### Creating dashboards
 
@@ -506,8 +508,22 @@ This looks like a pretty good start!  From here you can experiment with creating
 
 ## Wrapping up
 
+To recap, in this tutorial we have:
 
-- [ ] CI/CD
-- [ ] deploying superset (Preset)
-- [ ] next: Airflow, extraction, scraping
-- [ ] next: 
+ - Installed and configured each piece of the DS4FNP stack.
+ - Created a postgres database as our local development warehouse.
+ - Loaded our warehouse with data we extracted from external sources using Meltano.
+ - Transformed our raw data into refined data models using dbt.
+ - Created visualizations from our data model in Superset.
+
+Hopefully you should now have a good grasp of the technologies in the stack and how they come together to create a modern data analytics system.  What we have covered is by no means the extent of what is involved in developing a full production quality system, but it does establish a foundation to build from.  
+
+We just used a simple postgres instance running on our local machine for this tutorial, and doing so is indeed perfeclty valid for local development purposes, but at some point we want to utilize a scaleable cloud based warehouse like BigQuery or Snowflake.  Fortunately the transition from local development warehouse to cloud production warehouse is pretty easy with this stack.  Assuming we have a provisioned instance running somewhere, we would simply add its connection and credentials to our project configurations in Meltano and dbt.  These tools make it very easy to switch between deployment targets.
+
+For a real production environment, you probably also don't want to run these tools from your local machine.  Instead you would want to execute your pipelines using cloud based computing.  You could roll your own solution by hand, but fortunately there are existing cloud platforms that are simple to use.  For example, the creators of dbt offer [dbt Cloud](https://www.getdbt.com/product/) as a hosted service that "comes equipped with turnkey support for scheduling jobs, CI/CD, serving documentation, monitoring & alerting, and an Integrated Developer Environment (IDE)."
+
+Speaking of CI/CD, one of the benefits of defining your data warehouse through configuration and code is that you can manage those files with a version control system (like git) and treat the execution of your pipelines as a similar to a build process with your warehouse as the build target.  If you don't understand what any of that means right now, we'll touch on some DevOps topics in later tutorials.
+
+While your data pipelines can run only when needed (either triggered or), you will most likely want to have Superset running continuously so that you can acccess it as needed.  In a production environment, this is something you would want to deploy as a managed web service.  Similar to how dbt Cloud offers a hosted service for running dbt, [Preset.io](https://preset.io/) offers a hosted service for running Superset.
+
+The examples we used throughout this tutorial were somewhat oversimplified in order to present a broad overview of the entire stack and process, but subsequent tutorials will drill further down into specific aspects and include additional topics.  Some of these will include configuring CI/CD workflows, more advanced data source extraction, orchestration of workflows with Airflow, designing metrics, and working with cloud warehouses.

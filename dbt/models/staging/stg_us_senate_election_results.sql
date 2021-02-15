@@ -1,7 +1,7 @@
 select 
     to_date(year::VARCHAR, 'YYYY') as year,
     INITCAP(candidate) as candidate,
-    INITCAP(party) as party,
+    INITCAP(party_simplified) as party,
     INITCAP(state) as state,
     state_po,
     candidatevotes::INTEGER as candidate_votes,

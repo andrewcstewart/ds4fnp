@@ -39,14 +39,14 @@ plugins:
         delimiter: "\t"
       - path: https://dataverse.harvard.edu/api/access/datafile/
         name: mit__senate_elections
-        pattern: "3440424"
+        pattern: "4300300"
         start_date: '2010-01-01T00:00:00Z'
         key_properties: []
         format: csv
         delimiter: "\t"
       - path: https://dataverse.harvard.edu/api/access/datafile/
         name: mit__president_elections
-        pattern: "3444051"
+        pattern: "4299753"
         start_date: '2010-01-01T00:00:00Z'
         key_properties: []
         format: csv
