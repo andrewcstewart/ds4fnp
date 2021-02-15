@@ -527,3 +527,5 @@ Speaking of CI/CD, one of the benefits of defining your data warehouse through c
 While your data pipelines can run only when needed (either triggered or), you will most likely want to have Superset running continuously so that you can acccess it as needed.  In a production environment, this is something you would want to deploy as a managed web service.  Similar to how dbt Cloud offers a hosted service for running dbt, [Preset.io](https://preset.io/) offers a hosted service for running Superset.
 
 The examples we used throughout this tutorial were somewhat oversimplified in order to present a broad overview of the entire stack and process, but subsequent tutorials will drill further down into specific aspects and include additional topics.  Some of these will include configuring CI/CD workflows, more advanced data source extraction, orchestration of workflows with Airflow, designing metrics, and working with cloud warehouses.
+
+I hope you found this tutorial useful!
