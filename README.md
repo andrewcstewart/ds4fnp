@@ -6,7 +6,7 @@ Data Stacks For Fun & Nonprofits is a series of articles and tutorials aimed tow
 
 - [Data Stacks For Fun & Nonprofit — Part I](https://towardsdatascience.com/data-warehouse-side-projects-part-1-f7bd74323bd7) - Choosing a data warehouse for your side project
 - [Data Stacks For Fun & Nonprofit — Part II](https://towardsdatascience.com/data-stacks-for-fun-nonprofit-part-ii-d375d824abf3) - Designing a complete data stack with Meltano, dbt and Superset
-- Part III
+- [Data Stacks For Fun & Nonprofit - Part III](https://towardsdatascience.com/data-stacks-for-fun-nonprofit-part-iii-dcfd46da9f9f) - A tutorial overview of the DS4FNP stack.
 
 ## Tutorials
 

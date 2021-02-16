@@ -23,10 +23,10 @@ The primary data source we will use for this tutorial is from the [MIT Election 
 
 You will need the following for this tutorial:
 
-- Download and install [PostgreSQL](https://www.postgresql.org/download/), or an alternative SQL database if you prefer.
-- You may want a handy SQL client along the way; I recommend [TablePlus](https://tableplus.com/) or [pgcli](https://github.com/dbcli/pgcli).
+- Download and install [PostgreSQL](https://www.postgresql.org/download/).
+- You may to use a SQL client: I recommend [TablePlus](https://tableplus.com/) or [pgcli](https://github.com/dbcli/pgcli).
 - Most of the components in the stack depend on [Python3](https://www.python.org/).
-- I also recommend using a comfortable IDE, such as [VS Code](https://code.visualstudio.com/) (along with the [vscode-dbt](https://marketplace.visualstudio.com/items?itemName=bastienboutonnet.vscode-dbt) extension.)
+- I also recommend using an IDE, such as [VS Code](https://code.visualstudio.com/) (along with the [vscode-dbt](https://marketplace.visualstudio.com/items?itemName=bastienboutonnet.vscode-dbt) extension.)
 
 Let's begin!  If you just want to follow along, all the code/configuration generated during this tutorial can be found at https://github.com/andrewcstewart/ds4fnp.  Since many (if not all) of the components we are going to install are through python, I would strongly recommend creating a virtual environment.
 
@@ -64,8 +64,8 @@ This command will install the plugin in our project, and adds a configuration se
 To demonstrate, we will add URLs for three datasets from the MIT Dataverse for the tap to extract from:
 
 - US House elections: https://dataverse.harvard.edu/api/access/datafile/4202836
-- US Senate elections: https://dataverse.harvard.edu/api/access/datafile/3440424
-- US Presidential elections: https://dataverse.harvard.edu/api/access/datafile/3444051
+- US Senate elections: https://dataverse.harvard.edu/api/access/datafile/4300300
+- US Presidential elections: https://dataverse.harvard.edu/api/access/datafile/4299753
 
 Each of these URLs resolves to a tab-delimited file, so we will tell the tap to expect a "csv" file but with the "\t" delimiter.  We end up with our `meltano.yml` looking something like this:
 
@@ -518,7 +518,7 @@ To recap, in this tutorial we have:
 
 Hopefully you should now have a good grasp of the technologies in the stack and how they come together to create a modern data analytics system.  What we have covered is by no means the extent of what is involved in developing a full production quality system, but it does establish a foundation to build from.  
 
-We just used a simple postgres instance running on our local machine for this tutorial, and doing so is indeed perfeclty valid for local development purposes, but at some point we want to utilize a scaleable cloud based warehouse like BigQuery or Snowflake.  Fortunately the transition from local development warehouse to cloud production warehouse is pretty easy with this stack.  Assuming we have a provisioned instance running somewhere, we would simply add its connection and credentials to our project configurations in Meltano and dbt.  These tools make it very easy to switch between deployment targets.
+We just used a simple postgres instance running on our local machine for this tutorial, and doing so is indeed perfecttly valid for local development purposes, but at some point we want to utilize a scalable cloud based warehouse like BigQuery or Snowflake.  Fortunately the transition from local development warehouse to cloud production warehouse is pretty easy with this stack.  Assuming we have a provisioned instance running somewhere, we would simply add its connection and credentials to our project configurations in Meltano and dbt.  These tools make it very easy to switch between deployment targets.
 
 For a real production environment, you probably also don't want to run these tools from your local machine.  Instead you would want to execute your pipelines using cloud based computing.  You could roll your own solution by hand, but fortunately there are existing cloud platforms that are simple to use.  For example, the creators of dbt offer [dbt Cloud](https://www.getdbt.com/product/) as a hosted service that "comes equipped with turnkey support for scheduling jobs, CI/CD, serving documentation, monitoring & alerting, and an Integrated Developer Environment (IDE)."
 
