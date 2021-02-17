@@ -53,13 +53,13 @@ If you do an `ls` you'll notice several subdirectories have been created, along 
 
 ### Configuring sources for extraction
 
-Now that we have a project set up, we can add and configure some extractors (taps) and a loader (target).  Meltano offers Singer taps for sources ranging from Google Analytics, Zendesk, Salesforce, etc, to simple CSV files or SQL databases; however, there are also countless other third-party Singer taps out in the wild for all kinds of different data sources.  In this tutorial, we are just going pull some CSV files from URLs, so we only need to add the [`tap-spreadsheets-from-anywhere` plugin](https://meltano.com/plugins/extractors/spreadsheets-anywhere.html#getting-started) to our project.  This is a very versatile tap that will let us extract CSV and Excel files from many sources including http/s, s3, sftp, and more.
+Now that we have a project set up, we can add and configure some extractors (taps) and a loader (target).  Meltano offers Singer taps for sources ranging from Google Analytics, Zendesk, Salesforce, etc, to simple CSV files or SQL databases; however, there are also countless other third-party Singer taps out in the wild for all kinds of different data sources.  In this tutorial, we are just going pull some CSV files from URLs, so we only need to add the [`tap-spreadsheets-anywhere` plugin](https://meltano.com/plugins/extractors/spreadsheets-anywhere.html#getting-started) to our project.  This is a very versatile tap that will let us extract CSV and Excel files from many sources including http/s, s3, sftp, and more.
 
 ```sh
-meltano add extractor tap-spreadsheets-from-anywhere
+meltano add extractor tap-spreadsheets-anywhere
 ```
 
-This command will install the plugin in our project, and adds a configuration section to our `meltano.yml`.  Some taps are trivial to configure from the CLI, but for `tap-spreadsheets-from-anywhere` we need to author quite a few nested items under `tables:`, so it's probably easier to just edit the file manually.  The tap's [documentation](https://github.com/ets/tap-spreadsheets-anywhere) describes how to configure the tap to read specific sources.
+This command will install the plugin in our project, and adds a configuration section to our `meltano.yml`.  Some taps are trivial to configure from the CLI, but for `tap-spreadsheets-anywhere` we need to author quite a few nested items under `tables:`, so it's probably easier to just edit the file manually.  The tap's [documentation](https://github.com/ets/tap-spreadsheets-anywhere) describes how to configure the tap to read specific sources.
 
 To demonstrate, we will add URLs for three datasets from the MIT Dataverse for the tap to extract from:
 
@@ -76,12 +76,7 @@ project_id: xxx
 plugins:
   extractors:
   - name: tap-spreadsheets-anywhere
-    variant: original
     pip_url: git+https://github.com/ets/tap-spreadsheets-anywhere.git
-    capabilities:
-    - catalog
-    - discover
-    - state
     config:
       tables:   
       - path: https://dataverse.harvard.edu/api/access/datafile/
@@ -169,7 +164,7 @@ As I mentioned earlier, Meltano can actually incorporate dbt as a transformation
 
 ## Transforming and modeling data with dbt
 
-[dbt](https://www.getdbt.com) stands for "data build tool".  It is an open source project that provides a development environment for defining and managing analytics workflows in your data warehouse.  While Stitch (via Meltano) loads data into a database from one or more external sources, dbt transforms data into a new table from one or more existing tables (for example, raw data tables).  This is accomplished by defining data models with basic SQL queries that utilize the Jinja templating system to dynamically reference other tables.  If you have ever created web apps in frameworks like Flask where you programmatically populate content templated HTML, this does something very similar for SQL.  When you run dbt, all of these templated queries and metadata are compiled into table/view definitions that are executed upon our target data warehouse.  Take a moment to read more [here](https://docs.getdbt.com/docs/introduction).
+[dbt](https://www.getdbt.com) stands for "data build tool".  It is an open source project that provides a development environment for defining and managing analytics workflows in your data warehouse.  While Singer (via Meltano) loads data into a database from one or more external sources, dbt transforms data into a new table from one or more existing tables (for example, raw data tables).  This is accomplished by defining data models with basic SQL queries that utilize the Jinja templating system to dynamically reference other tables.  If you have ever created web apps in frameworks like Flask where you programmatically populate content templated HTML, this does something very similar for SQL.  When you run dbt, all of these templated queries and metadata are compiled into table/view definitions that are executed upon our target data warehouse.  Take a moment to read more [here](https://docs.getdbt.com/docs/introduction).
 
 ### Setting up dbt
 
