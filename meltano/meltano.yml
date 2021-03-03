@@ -12,24 +12,6 @@ plugins:
     - state
     config:
       tables:
-      # - path: http://www.parlgov.org/
-      #   name: parlgov__view_election
-      #   pattern: static/data/development-utf-8/view_election.csv
-      #   start_date: '2020-01-01T00:00:00Z'
-      #   key_properties: []
-      #   format: csv
-      # - path: http://www.parlgov.org/
-      #   name: parlgov__view_cabinet
-      #   pattern: static/data/development-utf-8/view_cabinet.csv
-      #   start_date: '2020-01-01T00:00:00Z'
-      #   key_properties: []
-      #   format: csv        
-      - path: http://www.parlgov.org/
-        name: parlgov__view_party
-        pattern: static/data/development-utf-8/view_party.csv
-        start_date: '2020-01-01T00:00:00Z'
-        key_properties: []
-        format: csv
       - path: https://dataverse.harvard.edu/api/access/datafile/
         name: mit__house_elections
         pattern: "4202836"
