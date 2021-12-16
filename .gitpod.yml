@@ -32,13 +32,15 @@ tasks:
       PIP_USER: false
     init: |
       export PIP_USER=false
+      cd meltano
       python3 -m venv .venv
       source .venv/bin/activate
-      cd meltano
       mkdir .meltano
       pip install meltano
       meltano install
-    command: source .venv/bin/activate    
+    command: |
+      cd meltano
+      source .venv/bin/activate    
 
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 ports:

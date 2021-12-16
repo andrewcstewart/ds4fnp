@@ -1,11 +1,12 @@
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/andrewcstewart/ds4fnp)
+
 # Data Stacks For Fun & Noneprofits!
 
 Data Stacks For Fun & Nonprofits is a series of articles and tutorials aimed towards designing and implementing a modern data stack using open source and open core components.  The DS4FNP stack is intended to be accessible enough for education purposes (both in terms of costs and laptop-deployable), but suitably scalable as a mature analytics architecture for organizations of all sizes.
 
 ## Getting started
 
-The easiest way to get started is with [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/andrewcstewart/ds4fnp)
-
+The easiest way to get started is with the "Open in Gitpod" button above!  This will spin up a Gitpod workspace complete with Meltano, dbt, Superset, and even a local postgers database!
 
 ## Articles
 
