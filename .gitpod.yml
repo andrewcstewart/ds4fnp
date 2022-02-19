@@ -1,33 +1,17 @@
 # Specify the workspace image configuration
 image:
-  file: .gitpod.Dockerfile
+  file: .gitpod/Dockerfile
 
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
-  - name: Database setup
+  - name: services
     init: |
+      docker-compose -f .gitpod/docker-compose.yml up -d
       gp await-port 5432
-      psql < setup.sql
-      gp sync-done dbsetup
-  - name: Superset setup
-    init: |
-      export SUPERSET_CONFIG_PATH=$PWD/superset/superset_config.py
-      export PIP_USER=false
-      python -m venv superset/.venv
-      source superset/.venv/bin/activate
-      pip install Pillow
-      pip install psycopg2
-      pip install apache-superset
-      gb sync-await dbsetup
-      superset db upgrade
-      superset fab create-admin --username admin --firstname admin --lastname admin --email your@email.com --password admin
-      superset init
-      superset import-datasources -p superset/datasources.yml
+      source .gitpod/setup.sh
     command: |
-      export SUPERSET_CONFIG_PATH=$PWD/superset/superset_config.py
-      source superset/.venv/bin/activate
-      superset run -h 0.0.0.0 -p 8088 --with-threads --reload --debugger
-  - name: Meltano setup
+      docker-compose -f .gitpod/docker-compose.yml
+  - name: meltano setup
     env:
       PIP_USER: false
     init: |
