@@ -1,0 +1,4 @@
+format: jb-book
+root: README
+chapters:
+- file: tutorials/tutorial-1
