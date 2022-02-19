@@ -1,0 +1,5 @@
+databases:
+- database_name: ds4fnp
+  extra: '{"allows_virtual_table_explore":true,"metadata_params":{},"engine_params":{},"schemas_allowed_for_csv_upload":[]}'
+  sqlalchemy_uri: postgresql+psycopg2://ds4fnp:ds4fnp@db:5432/ds4fnp
+  

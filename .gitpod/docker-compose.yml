@@ -1,0 +1,21 @@
+version: '3.3'
+
+services:
+  superset:
+    image: apache/superset
+    # see: https://hub.docker.com/r/apache/superset
+    ports:
+      - 8080:8088
+    volumes:
+      - .gitpod/superset:/setup:rw
+
+  db:
+    image: postgres
+    # see https://hub.docker.com/_/postgres
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - .gitpod/postgres:/docker-entrypoint-initdb.d/:ro
+    environment:
+      POSTGRES_PASSWORD: admin
