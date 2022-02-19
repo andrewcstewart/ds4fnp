@@ -1,0 +1,905 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tutorial 1 &#8212; Data Stacks For Fun &amp; Nonprofits</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Data Stacks For Fun &amp; Nonprofits!" href="../README.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Data Stacks For Fun & Nonprofits</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   Data Stacks For Fun &amp; Nonprofits!
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Tutorial 1
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/tutorials/tutorial-1.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/andrewcstewart/ds4fnp"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-some-data">
+   Finding some data!
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#collecting-data-with-meltano">
+   Collecting data with Meltano
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#setting-up-meltano">
+     Setting up Meltano
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configuring-sources-for-extraction">
+     Configuring sources for extraction
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configuring-targets-for-loading">
+     Configuring targets for loading
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-elt-workflows">
+     Running ELT workflows
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transforming-and-modeling-data-with-dbt">
+   Transforming and modeling data with dbt
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#setting-up-dbt">
+     Setting up dbt
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#defining-sources-and-staging-tables">
+     Defining sources and staging tables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#defining-data-models">
+     Defining data models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-dbt">
+     Running dbt
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analyzing-and-visualizing-data-with-superset">
+   Analyzing and visualizing data with Superset
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configuring-a-data-source">
+     Configuring a data source
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-datasets">
+     Creating datasets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-charts">
+     Creating charts
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-dashboards">
+     Creating dashboards
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#wrapping-up">
+   Wrapping up
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Tutorial 1</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-some-data">
+   Finding some data!
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#collecting-data-with-meltano">
+   Collecting data with Meltano
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#setting-up-meltano">
+     Setting up Meltano
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configuring-sources-for-extraction">
+     Configuring sources for extraction
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configuring-targets-for-loading">
+     Configuring targets for loading
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-elt-workflows">
+     Running ELT workflows
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transforming-and-modeling-data-with-dbt">
+   Transforming and modeling data with dbt
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#setting-up-dbt">
+     Setting up dbt
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#defining-sources-and-staging-tables">
+     Defining sources and staging tables
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#defining-data-models">
+     Defining data models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-dbt">
+     Running dbt
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analyzing-and-visualizing-data-with-superset">
+   Analyzing and visualizing data with Superset
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configuring-a-data-source">
+     Configuring a data source
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-datasets">
+     Creating datasets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-charts">
+     Creating charts
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-dashboards">
+     Creating dashboards
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#wrapping-up">
+   Wrapping up
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="tutorial-1">
+<h1>Tutorial 1<a class="headerlink" href="#tutorial-1" title="Permalink to this headline">¶</a></h1>
+<p>In this tutorial we are going to walk through each step of the DS4FNP stack.</p>
+<p>Data Stacks For Fun &amp; Nonprofits is a series of articles and tutorials aimed towards designing and implementing a modern data stack using open source and open core components.  The DS4FNP stack is intended to be accessible enough for education purposes (both in terms of costs and being laptop-deployable), but suitably scalable as a mature analytics architecture for organizations of all sizes.</p>
+<p>In a <a class="reference external" href="https://towardsdatascience.com/data-stacks-for-fun-nonprofit-part-ii-d375d824abf3">previous article</a>, I described and outlined the rationale behind a locally deployable stack composed of Postgres, Meltano, Airflow, dbt, and Apache Superset.  The Postgres database can be swapped out for other database engines such as SQLite and MySQL with few significant implications.  This setup allows us to work with a full data stack in a local environment, and then when we are ready to scale to a cloud hosted data warehouse like BigQuery or Snowflake, doing so is a simple matter of switching some configuration files.</p>
+<p>We’re now ready for a hands-on tutorial demonstrating how to setup each component of the stack and some example content.  We’re going to walk through the setup of each component in the stack, extract and load data into a data warehouse (ok, really just a local database for now), and design some basic analytics dashboards.</p>
+<div class="section" id="finding-some-data">
+<h2>Finding some data!<a class="headerlink" href="#finding-some-data" title="Permalink to this headline">¶</a></h2>
+<p>Before we get started, we need to come up with some kind of purpose or scenario to motivate our selection of data sources and objectives.  This is always the most difficult part of designing tutorials for such diverse potential use cases, as you want to try to present something relevant to all cases.  I think that an ideal scenario would be one that involves continuously generated data, such as sports statistics or server logs, as these would allow us to think in terms of regularly scheduled workflows and longitudinal plots.  However, in the interest of learning to walk before we run, let’s save those scenarios for a future tutorial and for now focus on some slower moving data.</p>
+<p>The past few months have been occupied with news about the 2020 US Elections, and finalized returns are now being made available from the usual sources, so this seems like a timely and suitable theme to go with.  From an analytical perspective, let’s set our interests on comparing recent and historical election results.</p>
+<p>Perhaps unsurprisingly, it turns out that data on US elections is incredibly decentralized, not always obvious where to find or how to access, and lacking any kind of common standards.  There are a few public institutions and academic researchers who bravely collect and publish some datasets, many of which I have begun to catalog and curate at <a class="reference external" href="https://github.com/andrewcstewart/awesome-democracy-data">https://github.com/andrewcstewart/awesome-democracy-data</a>.  If you are interested in data related to elections, electoral reforms, and democratic political systems, I encourage you to take a look!</p>
+<p>The primary data source we will use for this tutorial is from the <a class="reference external" href="https://electionlab.mit.edu/data">MIT Election Data + Science Lab</a>.  Specifically, we are interested in collecting historical US elections results for the House of Representatives, the Senate, and Presidential candidates in the Electoral College.</p>
+</div>
+<div class="section" id="collecting-data-with-meltano">
+<h2>Collecting data with Meltano<a class="headerlink" href="#collecting-data-with-meltano" title="Permalink to this headline">¶</a></h2>
+<p>You will need the following for this tutorial:</p>
+<ul class="simple">
+<li><p>Download and install <a class="reference external" href="https://www.postgresql.org/download/">PostgreSQL</a>.</p></li>
+<li><p>You may to use a SQL client: I recommend <a class="reference external" href="https://tableplus.com/">TablePlus</a> or <a class="reference external" href="https://github.com/dbcli/pgcli">pgcli</a>.</p></li>
+<li><p>Most of the components in the stack depend on <a class="reference external" href="https://www.python.org/">Python3</a>.</p></li>
+<li><p>I also recommend using an IDE, such as <a class="reference external" href="https://code.visualstudio.com/">VS Code</a> (along with the <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=bastienboutonnet.vscode-dbt">vscode-dbt</a> extension.)</p></li>
+</ul>
+<p>Let’s begin!  If you just want to follow along, all the code/configuration generated during this tutorial can be found at <a class="reference external" href="https://github.com/andrewcstewart/ds4fnp">https://github.com/andrewcstewart/ds4fnp</a>.  Since many (if not all) of the components we are going to install are through python, I would strongly recommend creating a virtual environment.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>mkdir ds4fnp
+<span class="nb">cd</span> ds4fnp                   
+python3 -m venv .venv       <span class="c1"># create your virtual environment</span>
+<span class="nb">source</span> .venv/bin/activate   <span class="c1"># activate your virtual environment</span>
+</pre></div>
+</div>
+<p>We’re going to use Meltano to manage our ELT (not ETL!) pipelines, each of which will extract data from some source and load that data into a target database.  If we were rolling our own ETL solution by hand, we would probably be writing an awful lot of custom python code for each data extraction and loading process, but fortunately the open-source <a class="reference external" href="https://www.singer.io/">Singer</a> standard composes these processes into interchangeable sets of “taps” (data sources) and “targets” (load destinations).  Meltano helps abstract away much of the configuration details, and provides a convenient execution layer.  Meltano can also handle the downstream transformation (via dbt) and orchestration (via Airflow) steps, making it convenient top-level controller for your entire project, however for illustrative purposes we’re going to only use Meltano for the extraction and loading steps.</p>
+<div class="section" id="setting-up-meltano">
+<h3>Setting up Meltano<a class="headerlink" href="#setting-up-meltano" title="Permalink to this headline">¶</a></h3>
+<p>Setting up Meltano is a simple matter of installing it and creating a new project.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip3 install meltano
+meltano init ./meltano
+<span class="nb">cd</span> ./meltano
+</pre></div>
+</div>
+<p>If you do an <code class="docutils literal notranslate"><span class="pre">ls</span></code> you’ll notice several subdirectories have been created, along with a <code class="docutils literal notranslate"><span class="pre">meltano.yml</span></code> file.  This file is where we’ll be doing most of the work, along with Meltano’s CLI.  I recommend skimming through <a class="reference external" href="https://meltano.com/docs/project.html#projects">Meltano’s documentation</a> for a good overview of how project config files work.  For the most part we will use the CLI to generate sections in <code class="docutils literal notranslate"><span class="pre">meltano.yml</span></code>, and then manually edit config options by hand as needed.</p>
+</div>
+<div class="section" id="configuring-sources-for-extraction">
+<h3>Configuring sources for extraction<a class="headerlink" href="#configuring-sources-for-extraction" title="Permalink to this headline">¶</a></h3>
+<p>Now that we have a project set up, we can add and configure some extractors (taps) and a loader (target).  Meltano offers Singer taps for sources ranging from Google Analytics, Zendesk, Salesforce, etc, to simple CSV files or SQL databases; however, there are also countless other third-party Singer taps out in the wild for all kinds of different data sources.  In this tutorial, we are just going pull some CSV files from URLs, so we only need to add the <a class="reference external" href="https://meltano.com/plugins/extractors/spreadsheets-anywhere.html#getting-started"><code class="docutils literal notranslate"><span class="pre">tap-spreadsheets-anywhere</span></code> plugin</a> to our project.  This is a very versatile tap that will let us extract CSV and Excel files from many sources including http/s, s3, sftp, and more.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>meltano add extractor tap-spreadsheets-anywhere
+</pre></div>
+</div>
+<p>This command will install the plugin in our project, and adds a configuration section to our <code class="docutils literal notranslate"><span class="pre">meltano.yml</span></code>.  Some taps are trivial to configure from the CLI, but for <code class="docutils literal notranslate"><span class="pre">tap-spreadsheets-anywhere</span></code> we need to author quite a few nested items under <code class="docutils literal notranslate"><span class="pre">tables:</span></code>, so it’s probably easier to just edit the file manually.  The tap’s <a class="reference external" href="https://github.com/ets/tap-spreadsheets-anywhere">documentation</a> describes how to configure the tap to read specific sources.</p>
+<p>To demonstrate, we will add URLs for three datasets from the MIT Dataverse for the tap to extract from:</p>
+<ul class="simple">
+<li><p>US House elections: <a class="reference external" href="https://dataverse.harvard.edu/api/access/datafile/4202836">https://dataverse.harvard.edu/api/access/datafile/4202836</a></p></li>
+<li><p>US Senate elections: <a class="reference external" href="https://dataverse.harvard.edu/api/access/datafile/4300300">https://dataverse.harvard.edu/api/access/datafile/4300300</a></p></li>
+<li><p>US Presidential elections: <a class="reference external" href="https://dataverse.harvard.edu/api/access/datafile/4299753">https://dataverse.harvard.edu/api/access/datafile/4299753</a></p></li>
+</ul>
+<p>Each of these URLs resolves to a tab-delimited file, so we will tell the tap to expect a “csv” file but with the “\t” delimiter.  We end up with our <code class="docutils literal notranslate"><span class="pre">meltano.yml</span></code> looking something like this:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
+<span class="nt">send_anonymous_usage_stats</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
+<span class="nt">project_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xxx</span><span class="w"></span>
+<span class="nt">plugins</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">extractors</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tap-spreadsheets-anywhere</span><span class="w"></span>
+<span class="w">    </span><span class="nt">pip_url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">git+https://github.com/ets/tap-spreadsheets-anywhere.git</span><span class="w"></span>
+<span class="w">    </span><span class="nt">config</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">tables</span><span class="p">:</span><span class="w">   </span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://dataverse.harvard.edu/api/access/datafile/</span><span class="w"></span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mit__house_elections</span><span class="w"></span>
+<span class="w">        </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4202836&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">start_date</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;2010-01-01T00:00:00Z&#39;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">key_properties</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
+<span class="w">        </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">csv</span><span class="w"></span>
+<span class="w">        </span><span class="nt">delimiter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;\t&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://dataverse.harvard.edu/api/access/datafile/</span><span class="w"></span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mit__senate_elections</span><span class="w"></span>
+<span class="w">        </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4300300&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">start_date</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;2010-01-01T00:00:00Z&#39;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">key_properties</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
+<span class="w">        </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">csv</span><span class="w"></span>
+<span class="w">        </span><span class="nt">delimiter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;\t&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://dataverse.harvard.edu/api/access/datafile/</span><span class="w"></span>
+<span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mit__president_elections</span><span class="w"></span>
+<span class="w">        </span><span class="nt">pattern</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4299753&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">start_date</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;2010-01-01T00:00:00Z&#39;</span><span class="w"></span>
+<span class="w">        </span><span class="nt">key_properties</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
+<span class="w">        </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">csv</span><span class="w"></span>
+<span class="w">        </span><span class="nt">delimiter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;\t&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuring-targets-for-loading">
+<h3>Configuring targets for loading<a class="headerlink" href="#configuring-targets-for-loading" title="Permalink to this headline">¶</a></h3>
+<p>Next we need to add a Singer target to tell Meltano about the Postgres database we want it to load the data into.  Before we do that though we need to create a database and permissions in Postgres.  For the purpose of this tutorial, we’ll just create a db with the name “ds4fnp”, along with an identically named user.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">create</span> <span class="n">database</span> <span class="n">ds4fnp</span><span class="p">;</span>
+<span class="n">create</span> <span class="n">user</span> <span class="n">ds4fnp</span> <span class="k">with</span> <span class="n">password</span> <span class="s1">&#39;ds4fnp&#39;</span><span class="p">;</span>
+<span class="n">grant</span> <span class="nb">all</span> <span class="n">privileges</span> <span class="n">on</span> <span class="n">database</span> <span class="n">ds4fnp</span> <span class="n">to</span> <span class="n">ds4fnp</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Then we can add the <code class="docutils literal notranslate"><span class="pre">target-postgres</span></code> loader to our project, similar to how we added the taps.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meltano</span> <span class="n">add</span> <span class="n">loader</span> <span class="n">target</span><span class="o">-</span><span class="n">postgres</span> <span class="o">--</span><span class="n">variant</span> <span class="n">meltano</span>
+</pre></div>
+</div>
+<p>After installing the plugin, <code class="docutils literal notranslate"><span class="pre">meltano.yml</span></code> now includes a <code class="docutils literal notranslate"><span class="pre">loaders</span></code> section with our particular target.  We can configure the target to use the database and credentials we just created.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="nt">loaders</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">target-postgres</span><span class="w"></span>
+<span class="w">    </span><span class="nt">pip_url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">git+https://github.com/meltano/target-postgres.git</span><span class="w"></span>
+<span class="w">    </span><span class="nt">config</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ds4fnp</span><span class="w"></span>
+<span class="w">      </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1</span><span class="w"></span>
+<span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432</span><span class="w"></span>
+<span class="w">      </span><span class="nt">dbname</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ds4fnp</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-elt-workflows">
+<h3>Running ELT workflows<a class="headerlink" href="#running-elt-workflows" title="Permalink to this headline">¶</a></h3>
+<p>With both our extractors and loaders in place, we are now ready to define and run a pipeline.  Using Meltano’s CLI, we just run <code class="docutils literal notranslate"><span class="pre">meltano</span> <span class="pre">elt</span> <span class="pre">[TAP]</span> <span class="pre">[TARGET]</span></code>, like so:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>meltano elt tap-spreadsheets-anywhere target-postgres
+</pre></div>
+</div>
+<p>This will run for a little while as Meltano extracts all the data from our sources and loads into our database.  In our <code class="docutils literal notranslate"><span class="pre">ds4fnp</span></code> database, we now have a new schema named after our tap which contains all the target tables we specified in <code class="docutils literal notranslate"><span class="pre">meltano.yml</span></code>.  For example, <code class="docutils literal notranslate"><span class="pre">ds4fnp.tap_spreadsheets_anywhere.mit__house_elections</span></code>.  To verify that all went well, we can look for those tables in our warehouse using our SQL browser of choice.</p>
+<p>We can explore the database with <code class="docutils literal notranslate"><span class="pre">pgcli</span></code> by running this:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pgcli postgresql://ds4fnp:ds4fnp@127.0.0.1/ds4fnp
+</pre></div>
+</div>
+<p>Or if you prefer a more visual experience, we can use TablePlus:</p>
+<p><img alt="tableplus-meltano-load" src="../_images/tableplus-meltano-load.png" /></p>
+<p>Great!  We now have some raw data loaded into our database.  We call this “raw” data because it contains many imperfections and uncertain quality, and ultimately we wish to refine it into more immediately useful products.  The whole crude oil pipeline analogy works pretty well here.  This is where transformation comes in.  Some examples of the types of issues we would want to handle through data transformations:</p>
+<ul class="simple">
+<li><p>All of the string fields in the <code class="docutils literal notranslate"><span class="pre">mit__house_elections</span></code> table are all capitalized, while in the other tables they are not.  We should be consistent with capitalization.</p></li>
+<li><p>Some fields use “Firstname Lastname” while others use “Lastname, Firstname”.  We should be consistent with name formats.</p></li>
+<li><p>There are lots of metadata fields that we probably don’t care about during analysis.  We can filter these out.</p></li>
+<li><p>These election results are at a very low level of granularity, whereas we probably want to work with numbers aggregated at some higher level.</p></li>
+</ul>
+<p>However, we’re going to handle transformations in the next step.  There is actually value in maintaining our raw data as originally loaded, and treating transformations as derivatives of that raw data.  Doing so helps us preserve the <a class="reference external" href="https://en.wikipedia.org/wiki/Data_lineage#Data_provenance">provenance</a> of the data, an auditable historical record of the data in its purest collected form.  It also allows us to revisit and modify our transformation tasks, which we could not do if we did not preserve the original raw data.</p>
+<p>As I mentioned earlier, Meltano can actually incorporate dbt as a transformation layer in its own project configurations, but for now we’re going to step through dbt ourselves.</p>
+</div>
+</div>
+<div class="section" id="transforming-and-modeling-data-with-dbt">
+<h2>Transforming and modeling data with dbt<a class="headerlink" href="#transforming-and-modeling-data-with-dbt" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.getdbt.com">dbt</a> stands for “data build tool”.  It is an open source project that provides a development environment for defining and managing analytics workflows in your data warehouse.  While Singer (via Meltano) loads data into a database from one or more external sources, dbt transforms data into a new table from one or more existing tables (for example, raw data tables).  This is accomplished by defining data models with basic SQL queries that utilize the Jinja templating system to dynamically reference other tables.  If you have ever created web apps in frameworks like Flask where you programmatically populate content templated HTML, this does something very similar for SQL.  When you run dbt, all of these templated queries and metadata are compiled into table/view definitions that are executed upon our target data warehouse.  Take a moment to read more <a class="reference external" href="https://docs.getdbt.com/docs/introduction">here</a>.</p>
+<div class="section" id="setting-up-dbt">
+<h3>Setting up dbt<a class="headerlink" href="#setting-up-dbt" title="Permalink to this headline">¶</a></h3>
+<p>Setting up dbt is very similar to that of Meltano.  We install from pip and create a new project with the dbt CLI.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ..                   <span class="c1"># go back to the ds4fnp base path</span>
+
+pip3 install dbt        <span class="c1"># install dbt</span>
+dbt init dbt            <span class="c1"># create a new dbt project called &#39;dbt&#39;</span>
+<span class="nb">cd</span> dbt                  <span class="c1"># </span>
+</pre></div>
+</div>
+<p>We now have a fresh project skeleton, including several subdirectories and a <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code> config file which is analogous to the the <code class="docutils literal notranslate"><span class="pre">meltano.yml</span></code> config file.  Very briefly, a dbt project consists of the following components:</p>
+<ul class="simple">
+<li><p><strong>sources</strong> are references to existing locations in our data warehouse where our loading processes deposit raw data.  These are defined under the <code class="docutils literal notranslate"><span class="pre">models</span></code> directory.</p></li>
+<li><p><strong>models</strong> are templated queries which define selections and transformations that dbt will materialize as new tables/views in our data warehouse.  Models may select from sources, or from other models.  These are also defined under the <code class="docutils literal notranslate"><span class="pre">models</span></code> directory.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">data</span></code></strong> is a directory that contains flat files in CSV format that dbt will automatically load into our data warehouse; this is useful for small immutable lookup tables.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">macros</span></code></strong> contains functions which can be used by the templating engine when defining queries.  We won’t get into macros too much here, but they provide the real power behind dbt.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">analysis</span></code></strong> queries are similar to models except that dbt only compiles them into rendered SQL without executing them on the data warehouse.  I find these useful for testing new ideas for queries without incorporating them into my overall data model, as well as pre-generating queries that can be used in downstream analyses and by BI platforms.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">docs</span></code></strong> contains a complete static documentation website generated by dbt.  This is a really awesome feature of dbt, and is key to making your data warehouse accessible to colleagues.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">tests</span></code></strong> offer a way to apply concepts from unit testing to the design of your project.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">snapshots</span></code></strong> offer a way to capture and preserve a historical record of sources that do not maintain their own history.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">target</span></code></strong> is where dbt writes the compiled queries prior to execution against the target data warehouse.</p></li>
+</ul>
+<p>For the most part we will only touch on a few of these components; namely sources and models.</p>
+<p>We also need to configure a <code class="docutils literal notranslate"><span class="pre">profiles.yml</span></code> file, which will contain our database credentials and is by default located outside of the project directory under <code class="docutils literal notranslate"><span class="pre">~/.dbt/profiles.yml</span></code>.  I recommend reading the <a class="reference external" href="https://docs.getdbt.com/dbt-cli/configure-your-profile/">documentation on profile configuration</a>.</p>
+<p>You can configure multiple profiles, easily allowing you to then deploy your dbt project against multiple targets.  For examples, you can deploy to your local postgres database for development purposes, and then deploy to BigQuery as your production data warehouse.  Here’s an example <code class="docutils literal notranslate"><span class="pre">profiles.yml</span></code> to get us started:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># For more information on how to configure this file, please see:</span><span class="w"></span>
+<span class="c1"># https://docs.getdbt.com/docs/profile</span><span class="w"></span>
+
+<span class="nt">ds4fnp</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">outputs</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">local</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span><span class="w"></span>
+<span class="w">      </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">127.0.0.1</span><span class="w"></span>
+<span class="w">      </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ds4fnp</span><span class="w"></span>
+<span class="w">      </span><span class="nt">pass</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ds4fnp</span><span class="w"></span>
+<span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432</span><span class="w"></span>
+<span class="w">      </span><span class="nt">dbname</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ds4fnp</span><span class="w"></span>
+<span class="w">      </span><span class="nt">schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">public</span><span class="w"></span>
+<span class="w">  </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span><span class="w"></span>
+</pre></div>
+</div>
+<p>With our profile setup, the next thing we’ll do is turn to the project configuration.  There are basically three different files we will be working with in a dbt project:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code> - This file informs dbt of the structure of the project, as well as a few general configuration options.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">schema.yml</span></code> - Data models are defined through a directory structure of yaml and sql files.  The <code class="docutils literal notranslate"><span class="pre">schema.yml</span></code> files enumerate and describe the metadata about each model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">*.sql</span></code> - Each model is then defined by a jinja templated SQL file.  These will look fairly similar to most SQL files you may have seen, except that direct references to database objects will be replaced by macros used by the templating engine.</p></li>
+</ul>
+<p>Rather than walk through designing an entire project configuration step by step, let’s instead look at a complete configuration.  I will leave a basic overview of the <code class="docutils literal notranslate"><span class="pre">dbt_project.yml</span></code> file to the formal <a class="reference external" href="https://docs.getdbt.com/reference/dbt_project.yml">documentation</a>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Name your project! Project names should contain only lowercase characters</span><span class="w"></span>
+<span class="c1"># and underscores. A good package name should reflect your organization&#39;s</span><span class="w"></span>
+<span class="c1"># name or the intended use of these models</span><span class="w"></span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;ds4fnp&#39;</span><span class="w"></span>
+<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;1.0.0&#39;</span><span class="w"></span>
+<span class="nt">config-version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
+
+<span class="c1"># This setting configures which &quot;profile&quot; dbt uses for this project.</span><span class="w"></span>
+<span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;ds4fnp&#39;</span><span class="w"></span>
+
+<span class="c1"># These configurations specify where dbt should look for different types of files.</span><span class="w"></span>
+<span class="c1"># The `source-paths` config, for example, states that models in this project can be</span><span class="w"></span>
+<span class="c1"># found in the &quot;models/&quot; directory. You probably won&#39;t need to change these!</span><span class="w"></span>
+<span class="nt">source-paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;models&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="nt">analysis-paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;analysis&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="nt">test-paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;tests&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="nt">data-paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;data&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="nt">macro-paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;macros&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
+<span class="nt">snapshot-paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;snapshots&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
+
+<span class="nt">target-path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;target&quot;</span><span class="w">  </span><span class="c1"># directory which will store compiled SQL files</span><span class="w"></span>
+<span class="nt">clean-targets</span><span class="p">:</span><span class="w">         </span><span class="c1"># directories to be removed by `dbt clean`</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;target&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;dbt_modules&quot;</span><span class="w"></span>
+
+
+<span class="c1"># Configuring models</span><span class="w"></span>
+<span class="c1"># Full documentation: https://docs.getdbt.com/docs/configuring-models</span><span class="w"></span>
+
+<span class="c1"># In this example config, we tell dbt to build all models in the example/ directory</span><span class="w"></span>
+<span class="c1"># as tables. These settings can be overridden in the individual model files</span><span class="w"></span>
+<span class="c1"># using the `{{ config(...) }}` macro.</span><span class="w"></span>
+<span class="nt">models</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">ds4fnp</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">staging</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">+schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">staging</span><span class="w"></span>
+<span class="w">        </span><span class="nt">+materialized</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">view</span><span class="w"></span>
+<span class="w">    </span><span class="c1"># marts:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">elections</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">+schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elections</span><span class="w"></span>
+<span class="w">        </span><span class="nt">+materialized</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">view</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Except for a couple edits, this is pretty much the stock configuration file that dbt generated for us during initialization.  The main things we changed are pointing <code class="docutils literal notranslate"><span class="pre">profile:</span></code> to the profile we created above, and everything under the <code class="docutils literal notranslate"><span class="pre">models:</span></code> section.  There are several ways to structure your data models, but we’ll keep things fairly simple here.  I have defined just two schemas:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">staging</span></code> will contain references to our data sources.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">elections</span></code> will contain the transformation models that we will use downstream.</p></li>
+</ul>
+</div>
+<div class="section" id="defining-sources-and-staging-tables">
+<h3>Defining sources and staging tables<a class="headerlink" href="#defining-sources-and-staging-tables" title="Permalink to this headline">¶</a></h3>
+<p>First let’s define our staging schema in <code class="docutils literal notranslate"><span class="pre">models/staging/schema.yml</span></code>.  From Meltano, we loaded three different sources into our warehouse (House, Senate, and Presidential election results).</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
+
+<span class="nt">sources</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mit</span><span class="w"></span>
+<span class="w">    </span><span class="nt">loader</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meltano</span><span class="w"></span>
+<span class="w">    </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ds4fnp</span><span class="w"></span>
+<span class="w">    </span><span class="nt">schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tap_spreadsheets_anywhere</span><span class="w"></span>
+<span class="w">    </span><span class="nt">tables</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mit__house_elections</span><span class="w"></span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MIT house election data</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mit__senate_elections</span><span class="w"></span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MIT senate election data</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mit__president_elections</span><span class="w"></span>
+<span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The data file `1976-2016-president` contains constituency (state-level) returns for elections to the U.S. presidency from 1976 to 2016.  The data source is the document &quot;[Statistics of the Congressional Election](http://history.house.gov/Institution/Election-Statistics/Election-Statistics/),&quot; published biennially by the Clerk of the U.S. House of Representatives.</span><span class="w"></span>
+<span class="w">        </span><span class="nt">columns</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">candidate</span><span class="w"></span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name of the candidate</span><span class="w"> </span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">candidatevotes</span><span class="w"></span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">votes received by this candidate for this particular party</span><span class="w"></span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">district</span><span class="w"></span>
+<span class="w">            </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
+<span class="nt">models</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">stg_us_house_election_results</span><span class="w"></span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">US House election results</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">stg_us_senate_election_results</span><span class="w"></span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">US Senate election results</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">stg_us_president_election_results</span><span class="w"></span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">US President election results</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In this file, we define the locations to our source tables under <code class="docutils literal notranslate"><span class="pre">sources:</span></code>, but we also define a corresponding set of “staging” models under <code class="docutils literal notranslate"><span class="pre">models:</span></code>.  The value of each <code class="docutils literal notranslate"><span class="pre">name:</span></code> field must then correspond to a <code class="docutils literal notranslate"><span class="pre">.sql</span></code> file which we will also create.  The reason we define staging models for each data source is that we may want to use the same source in multiple data models, but we don’t necessarily want to define the same filtering and data cleaning in every single instance.  With a staging model, we can define those transformations one time and in one single place so that any modifications to that data source can be reflected in every downstream model that references it.  The <code class="docutils literal notranslate"><span class="pre">schema.yml</span></code> file also allows us to describe and document the fields in our tables, which will come in handy later.</p>
+</div>
+<div class="section" id="defining-data-models">
+<h3>Defining data models<a class="headerlink" href="#defining-data-models" title="Permalink to this headline">¶</a></h3>
+<p>For the model definitions, I’ll just use the House elections as an example, as the other two will look similar and the full code is available from the Github repository mentioned earlier.  We will define the staging model for House election results in <code class="docutils literal notranslate"><span class="pre">models/staging/stg_us_house_election_results.sql</span></code>:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span>select 
+    to_date(year::VARCHAR, &#39;YYYY&#39;) as year,
+    INITCAP(candidate) as candidate,
+    INITCAP(party) as party,
+    INITCAP(state) as state,
+    state_po,
+    COALESCE(district, &#39;1&#39;) as district,
+    candidatevotes::INTEGER as candidate_votes,
+    totalvotes as total_votes,
+	ROUND(candidatevotes::numeric / totalvotes::numeric * 100, 2) as vote_pct
+from {{ source(&#39;mit&#39;,&#39;mit__house_elections&#39;) }}
+where writein::BOOLEAN is False
+</pre></div>
+</div>
+<p>As we can see from this staging model, the templated SQL in dbt mostly resembles regular SQL, except that we use a <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">source()</span> <span class="pre">}}</span></code> macro in the <code class="docutils literal notranslate"><span class="pre">from</span></code> clause of the query.  When dbt runs, it will populate the macro with the appropriate information from the project configuration.  In this staging model, we are basically selecting the source table as-is, except that we limit the fields returned and perform some transformations to a few of them.  For example:</p>
+<ul class="simple">
+<li><p>We have converted the <code class="docutils literal notranslate"><span class="pre">date</span></code> field to an actual date stamp type.</p></li>
+<li><p>We have corrected the all-caps strings in many fields with the <code class="docutils literal notranslate"><span class="pre">INITCAP()</span></code> function.</p></li>
+<li><p>We have interpolated some missing values in the <code class="docutils literal notranslate"><span class="pre">district</span></code> column.</p></li>
+</ul>
+<p>Just to name a few.  We then repeat this for the Senate and President election data sources.  Now that we have defined our sources and staging models, we can begin designing the data models we plan to use in our future analyses and in Superset.  Wheres the raw data provides election results for every single candidate (including write-ins, minor parties, etc) and each state/district, let’s work towards summarizing the results at the party level.  For these models we will create a new schema under <code class="docutils literal notranslate"><span class="pre">models/elections/schema.yml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
+
+<span class="nt">models</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">us_house_party_seats</span><span class="w"></span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Seats in the US House of Representatives by party.</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">us_senate_party_seats</span><span class="w"></span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Seats in the US Senate by party.</span><span class="w"></span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">us_president_popular_vote</span><span class="w"></span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Popular vote in US presidential elections by party.</span><span class="w"></span>
+</pre></div>
+</div>
+<p>This should look similar to the staging models we defined above.  To summarize the House results, let’s define a data model query that ranks and filters the candidates by votes received, and then finally aggregates the number of seats won by each party for each election year.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span>WITH 
+sub1 AS (
+    SELECT 
+        *,
+        rank() OVER (PARTITION BY year,
+        state,
+        district ORDER BY candidate_votes DESC) AS rank
+    FROM {{ ref(&#39;stg_us_house_election_results&#39;) }}
+),
+sub2 AS (
+    SELECT 
+        *, 
+        rank = 1 AS winner
+    FROM sub1
+)
+
+SELECT 
+	year,
+	party,
+	count(*) as seats
+FROM sub2
+WHERE winner = True
+GROUP BY year, party
+</pre></div>
+</div>
+<p>Our query looks fairly similar to that used in the staging model, with the main difference being the use of the <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">ref()</span> <span class="pre">}}</span></code> macro instead of the <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">source()</span> <span class="pre">}}</span></code> macro.  The other queries can be found in the Github repository.</p>
+</div>
+<div class="section" id="running-dbt">
+<h3>Running dbt<a class="headerlink" href="#running-dbt" title="Permalink to this headline">¶</a></h3>
+<p>After we have our project configured, we can now run dbt!  Note that in practice you probably want to run the project fairly often as you go along to validate your work.  To do so, we simply run <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">run</span></code> from the command line.  I’ll include the terminal output in the code snippet here:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>dbt run
+
+Running with <span class="nv">dbt</span><span class="o">=</span><span class="m">0</span>.18.1
+Found <span class="m">6</span> models, <span class="m">0</span> tests, <span class="m">0</span> snapshots, <span class="m">1</span> analysis, <span class="m">138</span> macros, <span class="m">0</span> operations, <span class="m">0</span> seed files, <span class="m">3</span> sources
+
+<span class="m">14</span>:08:49 <span class="p">|</span> Concurrency: <span class="m">1</span> threads <span class="o">(</span><span class="nv">target</span><span class="o">=</span><span class="s1">&#39;local&#39;</span><span class="o">)</span>
+<span class="m">14</span>:08:49 <span class="p">|</span> 
+<span class="m">14</span>:08:49 <span class="p">|</span> <span class="m">1</span> of <span class="m">5</span> START view model dbt_staging.stg_us_house_election_results.... <span class="o">[</span>RUN<span class="o">]</span>
+<span class="m">14</span>:08:49 <span class="p">|</span> <span class="m">1</span> of <span class="m">5</span> OK created view model dbt_staging.stg_us_house_election_results <span class="o">[</span>CREATE VIEW <span class="k">in</span> <span class="m">0</span>.23s<span class="o">]</span>
+<span class="m">14</span>:08:49 <span class="p">|</span> <span class="m">2</span> of <span class="m">5</span> START view model dbt_staging.stg_us_senate_election_results... <span class="o">[</span>RUN<span class="o">]</span>
+<span class="m">14</span>:08:49 <span class="p">|</span> <span class="m">2</span> of <span class="m">5</span> OK created view model dbt_staging.stg_us_senate_election_results <span class="o">[</span>CREATE VIEW <span class="k">in</span> <span class="m">0</span>.08s<span class="o">]</span>
+<span class="m">14</span>:08:49 <span class="p">|</span> <span class="m">3</span> of <span class="m">5</span> START view model dbt_staging.stg_us_president_election_results <span class="o">[</span>RUN<span class="o">]</span>
+<span class="m">14</span>:08:49 <span class="p">|</span> <span class="m">3</span> of <span class="m">5</span> OK created view model dbt_staging.stg_us_president_election_results <span class="o">[</span>CREATE VIEW <span class="k">in</span> <span class="m">0</span>.08s<span class="o">]</span>
+<span class="m">14</span>:08:49 <span class="p">|</span> <span class="m">4</span> of <span class="m">5</span> START view model dbt_elections.us_house_party_seats........... <span class="o">[</span>RUN<span class="o">]</span>
+<span class="m">14</span>:08:50 <span class="p">|</span> <span class="m">4</span> of <span class="m">5</span> OK created view model dbt_elections.us_house_party_seats...... <span class="o">[</span>CREATE VIEW <span class="k">in</span> <span class="m">0</span>.09s<span class="o">]</span>
+<span class="m">14</span>:08:50 <span class="p">|</span> <span class="m">5</span> of <span class="m">5</span> START view model dbt_elections.us_senate_party_seats.......... <span class="o">[</span>RUN<span class="o">]</span>
+<span class="m">14</span>:08:50 <span class="p">|</span> <span class="m">5</span> of <span class="m">5</span> OK created view model dbt_elections.us_senate_party_seats..... <span class="o">[</span>CREATE VIEW <span class="k">in</span> <span class="m">0</span>.07s<span class="o">]</span>
+<span class="m">14</span>:08:50 <span class="p">|</span> 
+<span class="m">14</span>:08:50 <span class="p">|</span> Finished running <span class="m">5</span> view models <span class="k">in</span> <span class="m">1</span>.26s.
+
+Completed successfully
+
+Done. <span class="nv">PASS</span><span class="o">=</span><span class="m">5</span> <span class="nv">WARN</span><span class="o">=</span><span class="m">0</span> <span class="nv">ERROR</span><span class="o">=</span><span class="m">0</span> <span class="nv">SKIP</span><span class="o">=</span><span class="m">0</span> <span class="nv">TOTAL</span><span class="o">=</span><span class="m">5</span>
+</pre></div>
+</div>
+<p>Awesome, our project compiled and ran successfully!  You can follow the progress as dbt runs and it will often provide informative diagnostics if something goes wrong.Before we peer into our data warehouse to see everything dbt generated, let’s quickly go over generating dbt’s docs.  We do this with just two more commands:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>dbt docs generate
+dbt docs serve
+</pre></div>
+</div>
+<p>This will generate your data warehouse’s documentation and spin up a temporary webserver so you can view it.  Take a minute to explore the generated site in your browser.</p>
+<p><img alt="dbt-docs-sources" src="../_images/dbt-docs-sources.png" /></p>
+<p>One of the great features with dbt is the graph on the right side of the site that allows you to visualize the relationships between your various views and tables.  Note that unlike ERD (Entity Relationship Diagrams) that you may have seen elsewhere, the relationships between tables here are of lineage; ie, which tables are the sources of other tables.  As projects grow in complexity, these diagrams and the auto-generated documentation in general can become highly valuable.</p>
+<p><img alt="dbt-docs-lineage" src="../_images/dbt-docs-lineage.png" /></p>
+<p>At this point you can also examine the tables you have generated in your local postgres data warehouse.  We will take a more directed look at them in the next section.</p>
+</div>
+</div>
+<div class="section" id="analyzing-and-visualizing-data-with-superset">
+<h2>Analyzing and visualizing data with Superset<a class="headerlink" href="#analyzing-and-visualizing-data-with-superset" title="Permalink to this headline">¶</a></h2>
+<p>At last we are ready to do something with our newly populated data warehouse.  Typically any analytics project is going to have some sort of BI layer with interactive data visualizations being dynamically updated with the data from our warehouse.  Of course, in this tutorial we are intentionally using an infrequently updated source of data (US elections only occur every two years).  None the less, we can <a class="reference external" href="https://superset.apache.org/docs/installation/installing-superset-from-scratch">setup Apache Superset</a> to demonstrate how one goes about this general task.</p>
+<p>Once again we will run a bunch of commands at the terminal:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip3 install apache-superset                <span class="c1"># install superset</span>
+superset db upgrade                         <span class="c1"># initialize superset&#39;s db</span>
+superset fab create-admin                   <span class="c1"># create an admin user</span>
+superset init                               <span class="c1"># set a bunch of defaults </span>
+superset run -p <span class="m">8088</span> --with-threads --reload --debugger     <span class="c1"># run it!</span>
+</pre></div>
+</div>
+<p>A few of these steps may involve some interaction, after which you should have a running instance of Superset that you can reach from your browser at <a class="reference external" href="http://localhost:8088">http://localhost:8088</a>.  At this point I would also recommend taking a quick skim through <a class="reference external" href="https://superset.apache.org/docs/intro">Superset’s documentation</a>.  Because the rest of this tutorial is away from the command line, I’ll first list the steps towards creating a dashboard in Superset, and then we’ll walk through them.  If you have used commercial BI tools like Tableau or Looker, this will look very similar.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Configure</span> <span class="pre">a</span> <span class="pre">data</span> <span class="pre">source</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">datasets</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">charts</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">dashboards</span></code></p></li>
+</ul>
+<p>If you want to skip right to the finished product, you can import the data and dashboard configurations that I’ve exported to the Github repository under the <code class="docutils literal notranslate"><span class="pre">superset</span></code> directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">superset</span> <span class="n">import</span><span class="o">-</span><span class="n">datasources</span> <span class="o">-</span><span class="n">p</span> <span class="n">datasources</span><span class="o">.</span><span class="n">yml</span>
+<span class="n">superset</span> <span class="n">import</span><span class="o">-</span><span class="n">dashboards</span> <span class="o">-</span><span class="n">p</span> <span class="n">dashboards</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+<div class="section" id="configuring-a-data-source">
+<h3>Configuring a data source<a class="headerlink" href="#configuring-a-data-source" title="Permalink to this headline">¶</a></h3>
+<p>We only need to establish a connection to our warehouse as data source.  You can add new connections by going to “Databases” under the “Data” menu.  Superset uses SQLAlchemy to manage database connections, so your connection string will look like this: <code class="docutils literal notranslate"><span class="pre">postgresql+psycopg2://ds4fnp:ds4fnp&#64;localhost:5432/ds4fnp</span></code></p>
+<p><img alt="superset-add-database" src="../_images/superset-add-database.png" /></p>
+<p>Before we get into data visualization, it’s worth pointing out that Superset has a handy built-in SQL client called “SQL Lab”.  Once you have added a data source, you can use the SQL Lab to browser database tables and run SQL queries.  This really useful for running ad-hoc analyses, as well as aiding development in Meltano and dbt.</p>
+<p><img alt="superset-try-sqllab" src="../_images/superset-try-sqllab.png" /></p>
+</div>
+<div class="section" id="creating-datasets">
+<h3>Creating datasets<a class="headerlink" href="#creating-datasets" title="Permalink to this headline">¶</a></h3>
+<p>Also under the “Data” menu is “Datasets”, which are typically going to be tables selected from your warehouse.  To create one, you select the database, schema, and table, and click save.</p>
+<p><img alt="superset-add-dataset" src="../_images/superset-add-dataset.png" /></p>
+</div>
+<div class="section" id="creating-charts">
+<h3>Creating charts<a class="headerlink" href="#creating-charts" title="Permalink to this headline">¶</a></h3>
+<p>Charts are the heart of Superset.  Creating one involves specifying which dataset to use, and then mapping various visual aesthetics to fields in your dataset.  We will create a very simple example here:</p>
+<ul class="simple">
+<li><p>Create a new chart.</p></li>
+<li><p>Select “dbt_elections.us_house_party_seats” as the dataset, and “Area Chart” as the chart type.</p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">year</span></code> as the time column, as well as the time grain.</p></li>
+<li><p>Set the time range to “No Filter”.</p></li>
+<li><p>Under metrics, select <code class="docutils literal notranslate"><span class="pre">seats</span></code> as the column and <code class="docutils literal notranslate"><span class="pre">SUM</span></code> as the aggregate.</p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">party</span></code> to group by.</p></li>
+</ul>
+<p>I also changed the color scheme under Customize to “Google Category 10c”, mostly to map the Democratic party to blue and the Republican party to red.</p>
+<p><img alt="superset-add-chart" src="../_images/superset-add-chart.png" /></p>
+<p>Repeat this process to create similar charts for the Senate and President election results.</p>
+<p><em>Note: Yes, I realize that democrats are red and republicans are blue in the Presidential election chart.  To address this, we would probably want to create an additional standardized party field in our tables in order to control how groupings and orderings work.</em></p>
+</div>
+<div class="section" id="creating-dashboards">
+<h3>Creating dashboards<a class="headerlink" href="#creating-dashboards" title="Permalink to this headline">¶</a></h3>
+<p>Dashboards in Superset provide a canvas for assembling charts and other artifacts into a single convenient page that users can view and interact with.  Superset makes it very easy to create a new dashboard and drag-and-drop charts onto the canvas.  Check out <a class="reference external" href="https://docs.preset.io/v1/docs/en/about-dashboards">Preset.io’s documentation</a> on Superset dashboards for further information on how to customize all of the various <a class="reference external" href="https://docs.preset.io/docs/dashboard-features">dashboard features</a>.</p>
+<p>For this tutorial, I simply created a fresh dashboard and dragged each chart we just created onto it.</p>
+<p><img alt="superset-add-dashboard" src="../_images/superset-add-dashboard.png" /></p>
+<p>Once you have your dashboard looking how you want it to, just save it and click on the “Draft” toggle to set the dashboard as published.</p>
+<p><img alt="superset-published-dashboard" src="../_images/superset-published-dashboard.png" /></p>
+<p>This looks like a pretty good start!  From here you can experiment with creating more charts and dashboards.  You may also want to go back to your data model and create additional tables/views that can power other types of charts.  If you are feeling especially bold, you may even want to try adding additional loaders in Meltano and combining multiple data sources in your dbt project.</p>
+</div>
+</div>
+<div class="section" id="wrapping-up">
+<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Permalink to this headline">¶</a></h2>
+<p>To recap, in this tutorial we have:</p>
+<ul class="simple">
+<li><p>Installed and configured each piece of the DS4FNP stack.</p></li>
+<li><p>Created a postgres database as our local development warehouse.</p></li>
+<li><p>Loaded our warehouse with data we extracted from external sources using Meltano.</p></li>
+<li><p>Transformed our raw data into refined data models using dbt.</p></li>
+<li><p>Created visualizations from our data model in Superset.</p></li>
+</ul>
+<p>Hopefully you should now have a good grasp of the technologies in the stack and how they come together to create a modern data analytics system.  What we have covered is by no means the extent of what is involved in developing a full production quality system, but it does establish a foundation to build from.</p>
+<p>We just used a simple postgres instance running on our local machine for this tutorial, and doing so is indeed perfecttly valid for local development purposes, but at some point we want to utilize a scalable cloud based warehouse like BigQuery or Snowflake.  Fortunately the transition from local development warehouse to cloud production warehouse is pretty easy with this stack.  Assuming we have a provisioned instance running somewhere, we would simply add its connection and credentials to our project configurations in Meltano and dbt.  These tools make it very easy to switch between deployment targets.</p>
+<p>For a real production environment, you probably also don’t want to run these tools from your local machine.  Instead you would want to execute your pipelines using cloud based computing.  You could roll your own solution by hand, but fortunately there are existing cloud platforms that are simple to use.  For example, the creators of dbt offer <a class="reference external" href="https://www.getdbt.com/product/">dbt Cloud</a> as a hosted service that “comes equipped with turnkey support for scheduling jobs, CI/CD, serving documentation, monitoring &amp; alerting, and an Integrated Developer Environment (IDE).”</p>
+<p>Speaking of CI/CD, one of the benefits of defining your data warehouse through configuration and code is that you can manage those files with a version control system (like git) and treat the execution of your pipelines as a similar to a build process with your warehouse as the build target.  If you don’t understand what any of that means right now, we’ll touch on some DevOps topics in later tutorials.</p>
+<p>While your data pipelines can run only when needed (either triggered or), you will most likely want to have Superset running continuously so that you can acccess it as needed.  In a production environment, this is something you would want to deploy as a managed web service.  Similar to how dbt Cloud offers a hosted service for running dbt, <a class="reference external" href="https://preset.io/">Preset.io</a> offers a hosted service for running Superset.</p>
+<p>The examples we used throughout this tutorial were somewhat oversimplified in order to present a broad overview of the entire stack and process, but subsequent tutorials will drill further down into specific aspects and include additional topics.  Some of these will include configuring CI/CD workflows, more advanced data source extraction, orchestration of workflows with Airflow, designing metrics, and working with cloud warehouses.</p>
+<p>I hope you found this tutorial useful!</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./tutorials"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../README.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Data Stacks For Fun &amp; Nonprofits!</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Andrew Stewart<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
