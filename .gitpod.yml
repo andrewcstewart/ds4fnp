@@ -10,7 +10,7 @@ tasks:
       gp await-port 5432
       source .gitpod/setup.sh
     command: |
-      docker-compose -f .gitpod/docker-compose.yml
+      docker-compose -f .gitpod/docker-compose.yml up
   - name: meltano setup
     env:
       PIP_USER: false
