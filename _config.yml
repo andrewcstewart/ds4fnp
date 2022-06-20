@@ -1,6 +1,6 @@
 title: Data Stacks For Fun & Nonprofits
 author: Andrew Stewart
-# logo: logo.png
+logo: logo.png
 execute:
   execute_notebooks: off
 exclude_patterns: [_build, Thumbs.db, .DS_Store, "**.ipynb_checkpoints", .venv]
