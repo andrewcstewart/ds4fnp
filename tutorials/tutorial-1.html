@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Tutorial 1 &#8212; Data Stacks For Fun &amp; Nonprofits</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +20,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -39,18 +37,18 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -62,7 +60,21 @@
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -71,11 +83,17 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">Data Stacks For Fun & Nonprofits</h1>
@@ -86,14 +104,15 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../README.html">
-   Data Stacks For Fun &amp; Nonprofits!
-  </a>
- </li>
-</ul>
-<ul class="current nav bd-sidenav">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    Data Stacks For Fun & Nonprofits!
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Tutorial 1
@@ -102,87 +121,148 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/tutorials/tutorial-1.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/andrewcstewart/ds4fnp"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/andrewcstewart/ds4fnp"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/tutorials/tutorial-1.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#finding-some-data">
    Finding some data!
@@ -276,12 +356,11 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Tutorial 1</h1>
@@ -391,24 +470,25 @@
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="tutorial-1">
-<h1>Tutorial 1<a class="headerlink" href="#tutorial-1" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="tutorial-1">
+<h1>Tutorial 1<a class="headerlink" href="#tutorial-1" title="Permalink to this headline">#</a></h1>
 <p>In this tutorial we are going to walk through each step of the DS4FNP stack.</p>
 <p>Data Stacks For Fun &amp; Nonprofits is a series of articles and tutorials aimed towards designing and implementing a modern data stack using open source and open core components.  The DS4FNP stack is intended to be accessible enough for education purposes (both in terms of costs and being laptop-deployable), but suitably scalable as a mature analytics architecture for organizations of all sizes.</p>
 <p>In a <a class="reference external" href="https://towardsdatascience.com/data-stacks-for-fun-nonprofit-part-ii-d375d824abf3">previous article</a>, I described and outlined the rationale behind a locally deployable stack composed of Postgres, Meltano, Airflow, dbt, and Apache Superset.  The Postgres database can be swapped out for other database engines such as SQLite and MySQL with few significant implications.  This setup allows us to work with a full data stack in a local environment, and then when we are ready to scale to a cloud hosted data warehouse like BigQuery or Snowflake, doing so is a simple matter of switching some configuration files.</p>
 <p>We’re now ready for a hands-on tutorial demonstrating how to setup each component of the stack and some example content.  We’re going to walk through the setup of each component in the stack, extract and load data into a data warehouse (ok, really just a local database for now), and design some basic analytics dashboards.</p>
-<div class="section" id="finding-some-data">
-<h2>Finding some data!<a class="headerlink" href="#finding-some-data" title="Permalink to this headline">¶</a></h2>
+<section id="finding-some-data">
+<h2>Finding some data!<a class="headerlink" href="#finding-some-data" title="Permalink to this headline">#</a></h2>
 <p>Before we get started, we need to come up with some kind of purpose or scenario to motivate our selection of data sources and objectives.  This is always the most difficult part of designing tutorials for such diverse potential use cases, as you want to try to present something relevant to all cases.  I think that an ideal scenario would be one that involves continuously generated data, such as sports statistics or server logs, as these would allow us to think in terms of regularly scheduled workflows and longitudinal plots.  However, in the interest of learning to walk before we run, let’s save those scenarios for a future tutorial and for now focus on some slower moving data.</p>
 <p>The past few months have been occupied with news about the 2020 US Elections, and finalized returns are now being made available from the usual sources, so this seems like a timely and suitable theme to go with.  From an analytical perspective, let’s set our interests on comparing recent and historical election results.</p>
 <p>Perhaps unsurprisingly, it turns out that data on US elections is incredibly decentralized, not always obvious where to find or how to access, and lacking any kind of common standards.  There are a few public institutions and academic researchers who bravely collect and publish some datasets, many of which I have begun to catalog and curate at <a class="reference external" href="https://github.com/andrewcstewart/awesome-democracy-data">https://github.com/andrewcstewart/awesome-democracy-data</a>.  If you are interested in data related to elections, electoral reforms, and democratic political systems, I encourage you to take a look!</p>
 <p>The primary data source we will use for this tutorial is from the <a class="reference external" href="https://electionlab.mit.edu/data">MIT Election Data + Science Lab</a>.  Specifically, we are interested in collecting historical US elections results for the House of Representatives, the Senate, and Presidential candidates in the Electoral College.</p>
-</div>
-<div class="section" id="collecting-data-with-meltano">
-<h2>Collecting data with Meltano<a class="headerlink" href="#collecting-data-with-meltano" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="collecting-data-with-meltano">
+<h2>Collecting data with Meltano<a class="headerlink" href="#collecting-data-with-meltano" title="Permalink to this headline">#</a></h2>
 <p>You will need the following for this tutorial:</p>
 <ul class="simple">
 <li><p>Download and install <a class="reference external" href="https://www.postgresql.org/download/">PostgreSQL</a>.</p></li>
@@ -424,8 +504,8 @@ python3 -m venv .venv       <span class="c1"># create your virtual environment</
 </pre></div>
 </div>
 <p>We’re going to use Meltano to manage our ELT (not ETL!) pipelines, each of which will extract data from some source and load that data into a target database.  If we were rolling our own ETL solution by hand, we would probably be writing an awful lot of custom python code for each data extraction and loading process, but fortunately the open-source <a class="reference external" href="https://www.singer.io/">Singer</a> standard composes these processes into interchangeable sets of “taps” (data sources) and “targets” (load destinations).  Meltano helps abstract away much of the configuration details, and provides a convenient execution layer.  Meltano can also handle the downstream transformation (via dbt) and orchestration (via Airflow) steps, making it convenient top-level controller for your entire project, however for illustrative purposes we’re going to only use Meltano for the extraction and loading steps.</p>
-<div class="section" id="setting-up-meltano">
-<h3>Setting up Meltano<a class="headerlink" href="#setting-up-meltano" title="Permalink to this headline">¶</a></h3>
+<section id="setting-up-meltano">
+<h3>Setting up Meltano<a class="headerlink" href="#setting-up-meltano" title="Permalink to this headline">#</a></h3>
 <p>Setting up Meltano is a simple matter of installing it and creating a new project.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip3 install meltano
 meltano init ./meltano
@@ -433,9 +513,9 @@ meltano init ./meltano
 </pre></div>
 </div>
 <p>If you do an <code class="docutils literal notranslate"><span class="pre">ls</span></code> you’ll notice several subdirectories have been created, along with a <code class="docutils literal notranslate"><span class="pre">meltano.yml</span></code> file.  This file is where we’ll be doing most of the work, along with Meltano’s CLI.  I recommend skimming through <a class="reference external" href="https://meltano.com/docs/project.html#projects">Meltano’s documentation</a> for a good overview of how project config files work.  For the most part we will use the CLI to generate sections in <code class="docutils literal notranslate"><span class="pre">meltano.yml</span></code>, and then manually edit config options by hand as needed.</p>
-</div>
-<div class="section" id="configuring-sources-for-extraction">
-<h3>Configuring sources for extraction<a class="headerlink" href="#configuring-sources-for-extraction" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="configuring-sources-for-extraction">
+<h3>Configuring sources for extraction<a class="headerlink" href="#configuring-sources-for-extraction" title="Permalink to this headline">#</a></h3>
 <p>Now that we have a project set up, we can add and configure some extractors (taps) and a loader (target).  Meltano offers Singer taps for sources ranging from Google Analytics, Zendesk, Salesforce, etc, to simple CSV files or SQL databases; however, there are also countless other third-party Singer taps out in the wild for all kinds of different data sources.  In this tutorial, we are just going pull some CSV files from URLs, so we only need to add the <a class="reference external" href="https://meltano.com/plugins/extractors/spreadsheets-anywhere.html#getting-started"><code class="docutils literal notranslate"><span class="pre">tap-spreadsheets-anywhere</span></code> plugin</a> to our project.  This is a very versatile tap that will let us extract CSV and Excel files from many sources including http/s, s3, sftp, and more.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>meltano add extractor tap-spreadsheets-anywhere
 </pre></div>
@@ -480,9 +560,9 @@ meltano init ./meltano
 <span class="w">        </span><span class="nt">delimiter</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;\t&quot;</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="configuring-targets-for-loading">
-<h3>Configuring targets for loading<a class="headerlink" href="#configuring-targets-for-loading" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="configuring-targets-for-loading">
+<h3>Configuring targets for loading<a class="headerlink" href="#configuring-targets-for-loading" title="Permalink to this headline">#</a></h3>
 <p>Next we need to add a Singer target to tell Meltano about the Postgres database we want it to load the data into.  Before we do that though we need to create a database and permissions in Postgres.  For the purpose of this tutorial, we’ll just create a db with the name “ds4fnp”, along with an identically named user.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">create</span> <span class="n">database</span> <span class="n">ds4fnp</span><span class="p">;</span>
 <span class="n">create</span> <span class="n">user</span> <span class="n">ds4fnp</span> <span class="k">with</span> <span class="n">password</span> <span class="s1">&#39;ds4fnp&#39;</span><span class="p">;</span>
@@ -504,9 +584,9 @@ meltano init ./meltano
 <span class="w">      </span><span class="nt">dbname</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ds4fnp</span><span class="w"></span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="running-elt-workflows">
-<h3>Running ELT workflows<a class="headerlink" href="#running-elt-workflows" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="running-elt-workflows">
+<h3>Running ELT workflows<a class="headerlink" href="#running-elt-workflows" title="Permalink to this headline">#</a></h3>
 <p>With both our extractors and loaders in place, we are now ready to define and run a pipeline.  Using Meltano’s CLI, we just run <code class="docutils literal notranslate"><span class="pre">meltano</span> <span class="pre">elt</span> <span class="pre">[TAP]</span> <span class="pre">[TARGET]</span></code>, like so:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>meltano elt tap-spreadsheets-anywhere target-postgres
 </pre></div>
@@ -527,13 +607,13 @@ meltano init ./meltano
 </ul>
 <p>However, we’re going to handle transformations in the next step.  There is actually value in maintaining our raw data as originally loaded, and treating transformations as derivatives of that raw data.  Doing so helps us preserve the <a class="reference external" href="https://en.wikipedia.org/wiki/Data_lineage#Data_provenance">provenance</a> of the data, an auditable historical record of the data in its purest collected form.  It also allows us to revisit and modify our transformation tasks, which we could not do if we did not preserve the original raw data.</p>
 <p>As I mentioned earlier, Meltano can actually incorporate dbt as a transformation layer in its own project configurations, but for now we’re going to step through dbt ourselves.</p>
-</div>
-</div>
-<div class="section" id="transforming-and-modeling-data-with-dbt">
-<h2>Transforming and modeling data with dbt<a class="headerlink" href="#transforming-and-modeling-data-with-dbt" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="transforming-and-modeling-data-with-dbt">
+<h2>Transforming and modeling data with dbt<a class="headerlink" href="#transforming-and-modeling-data-with-dbt" title="Permalink to this headline">#</a></h2>
 <p><a class="reference external" href="https://www.getdbt.com">dbt</a> stands for “data build tool”.  It is an open source project that provides a development environment for defining and managing analytics workflows in your data warehouse.  While Singer (via Meltano) loads data into a database from one or more external sources, dbt transforms data into a new table from one or more existing tables (for example, raw data tables).  This is accomplished by defining data models with basic SQL queries that utilize the Jinja templating system to dynamically reference other tables.  If you have ever created web apps in frameworks like Flask where you programmatically populate content templated HTML, this does something very similar for SQL.  When you run dbt, all of these templated queries and metadata are compiled into table/view definitions that are executed upon our target data warehouse.  Take a moment to read more <a class="reference external" href="https://docs.getdbt.com/docs/introduction">here</a>.</p>
-<div class="section" id="setting-up-dbt">
-<h3>Setting up dbt<a class="headerlink" href="#setting-up-dbt" title="Permalink to this headline">¶</a></h3>
+<section id="setting-up-dbt">
+<h3>Setting up dbt<a class="headerlink" href="#setting-up-dbt" title="Permalink to this headline">#</a></h3>
 <p>Setting up dbt is very similar to that of Meltano.  We install from pip and create a new project with the dbt CLI.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ..                   <span class="c1"># go back to the ds4fnp base path</span>
 
@@ -628,9 +708,9 @@ dbt init dbt            <span class="c1"># create a new dbt project called &#39;
 <li><p><code class="docutils literal notranslate"><span class="pre">staging</span></code> will contain references to our data sources.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">elections</span></code> will contain the transformation models that we will use downstream.</p></li>
 </ul>
-</div>
-<div class="section" id="defining-sources-and-staging-tables">
-<h3>Defining sources and staging tables<a class="headerlink" href="#defining-sources-and-staging-tables" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="defining-sources-and-staging-tables">
+<h3>Defining sources and staging tables<a class="headerlink" href="#defining-sources-and-staging-tables" title="Permalink to this headline">#</a></h3>
 <p>First let’s define our staging schema in <code class="docutils literal notranslate"><span class="pre">models/staging/schema.yml</span></code>.  From Meltano, we loaded three different sources into our warehouse (House, Senate, and Presidential election results).</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
 
@@ -664,9 +744,9 @@ dbt init dbt            <span class="c1"># create a new dbt project called &#39;
 </pre></div>
 </div>
 <p>In this file, we define the locations to our source tables under <code class="docutils literal notranslate"><span class="pre">sources:</span></code>, but we also define a corresponding set of “staging” models under <code class="docutils literal notranslate"><span class="pre">models:</span></code>.  The value of each <code class="docutils literal notranslate"><span class="pre">name:</span></code> field must then correspond to a <code class="docutils literal notranslate"><span class="pre">.sql</span></code> file which we will also create.  The reason we define staging models for each data source is that we may want to use the same source in multiple data models, but we don’t necessarily want to define the same filtering and data cleaning in every single instance.  With a staging model, we can define those transformations one time and in one single place so that any modifications to that data source can be reflected in every downstream model that references it.  The <code class="docutils literal notranslate"><span class="pre">schema.yml</span></code> file also allows us to describe and document the fields in our tables, which will come in handy later.</p>
-</div>
-<div class="section" id="defining-data-models">
-<h3>Defining data models<a class="headerlink" href="#defining-data-models" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="defining-data-models">
+<h3>Defining data models<a class="headerlink" href="#defining-data-models" title="Permalink to this headline">#</a></h3>
 <p>For the model definitions, I’ll just use the House elections as an example, as the other two will look similar and the full code is available from the Github repository mentioned earlier.  We will define the staging model for House election results in <code class="docutils literal notranslate"><span class="pre">models/staging/stg_us_house_election_results.sql</span></code>:</p>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span>select 
     to_date(year::VARCHAR, &#39;YYYY&#39;) as year,
@@ -727,9 +807,9 @@ GROUP BY year, party
 </pre></div>
 </div>
 <p>Our query looks fairly similar to that used in the staging model, with the main difference being the use of the <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">ref()</span> <span class="pre">}}</span></code> macro instead of the <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">source()</span> <span class="pre">}}</span></code> macro.  The other queries can be found in the Github repository.</p>
-</div>
-<div class="section" id="running-dbt">
-<h3>Running dbt<a class="headerlink" href="#running-dbt" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="running-dbt">
+<h3>Running dbt<a class="headerlink" href="#running-dbt" title="Permalink to this headline">#</a></h3>
 <p>After we have our project configured, we can now run dbt!  Note that in practice you probably want to run the project fairly often as you go along to validate your work.  To do so, we simply run <code class="docutils literal notranslate"><span class="pre">dbt</span> <span class="pre">run</span></code> from the command line.  I’ll include the terminal output in the code snippet here:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>dbt run
 
@@ -766,10 +846,10 @@ dbt docs serve
 <p>One of the great features with dbt is the graph on the right side of the site that allows you to visualize the relationships between your various views and tables.  Note that unlike ERD (Entity Relationship Diagrams) that you may have seen elsewhere, the relationships between tables here are of lineage; ie, which tables are the sources of other tables.  As projects grow in complexity, these diagrams and the auto-generated documentation in general can become highly valuable.</p>
 <p><img alt="dbt-docs-lineage" src="../_images/dbt-docs-lineage.png" /></p>
 <p>At this point you can also examine the tables you have generated in your local postgres data warehouse.  We will take a more directed look at them in the next section.</p>
-</div>
-</div>
-<div class="section" id="analyzing-and-visualizing-data-with-superset">
-<h2>Analyzing and visualizing data with Superset<a class="headerlink" href="#analyzing-and-visualizing-data-with-superset" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="analyzing-and-visualizing-data-with-superset">
+<h2>Analyzing and visualizing data with Superset<a class="headerlink" href="#analyzing-and-visualizing-data-with-superset" title="Permalink to this headline">#</a></h2>
 <p>At last we are ready to do something with our newly populated data warehouse.  Typically any analytics project is going to have some sort of BI layer with interactive data visualizations being dynamically updated with the data from our warehouse.  Of course, in this tutorial we are intentionally using an infrequently updated source of data (US elections only occur every two years).  None the less, we can <a class="reference external" href="https://superset.apache.org/docs/installation/installing-superset-from-scratch">setup Apache Superset</a> to demonstrate how one goes about this general task.</p>
 <p>Once again we will run a bunch of commands at the terminal:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip3 install apache-superset                <span class="c1"># install superset</span>
@@ -791,20 +871,20 @@ superset run -p <span class="m">8088</span> --with-threads --reload --debugger  
 <span class="n">superset</span> <span class="n">import</span><span class="o">-</span><span class="n">dashboards</span> <span class="o">-</span><span class="n">p</span> <span class="n">dashboards</span><span class="o">.</span><span class="n">json</span>
 </pre></div>
 </div>
-<div class="section" id="configuring-a-data-source">
-<h3>Configuring a data source<a class="headerlink" href="#configuring-a-data-source" title="Permalink to this headline">¶</a></h3>
+<section id="configuring-a-data-source">
+<h3>Configuring a data source<a class="headerlink" href="#configuring-a-data-source" title="Permalink to this headline">#</a></h3>
 <p>We only need to establish a connection to our warehouse as data source.  You can add new connections by going to “Databases” under the “Data” menu.  Superset uses SQLAlchemy to manage database connections, so your connection string will look like this: <code class="docutils literal notranslate"><span class="pre">postgresql+psycopg2://ds4fnp:ds4fnp&#64;localhost:5432/ds4fnp</span></code></p>
 <p><img alt="superset-add-database" src="../_images/superset-add-database.png" /></p>
 <p>Before we get into data visualization, it’s worth pointing out that Superset has a handy built-in SQL client called “SQL Lab”.  Once you have added a data source, you can use the SQL Lab to browser database tables and run SQL queries.  This really useful for running ad-hoc analyses, as well as aiding development in Meltano and dbt.</p>
 <p><img alt="superset-try-sqllab" src="../_images/superset-try-sqllab.png" /></p>
-</div>
-<div class="section" id="creating-datasets">
-<h3>Creating datasets<a class="headerlink" href="#creating-datasets" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="creating-datasets">
+<h3>Creating datasets<a class="headerlink" href="#creating-datasets" title="Permalink to this headline">#</a></h3>
 <p>Also under the “Data” menu is “Datasets”, which are typically going to be tables selected from your warehouse.  To create one, you select the database, schema, and table, and click save.</p>
 <p><img alt="superset-add-dataset" src="../_images/superset-add-dataset.png" /></p>
-</div>
-<div class="section" id="creating-charts">
-<h3>Creating charts<a class="headerlink" href="#creating-charts" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="creating-charts">
+<h3>Creating charts<a class="headerlink" href="#creating-charts" title="Permalink to this headline">#</a></h3>
 <p>Charts are the heart of Superset.  Creating one involves specifying which dataset to use, and then mapping various visual aesthetics to fields in your dataset.  We will create a very simple example here:</p>
 <ul class="simple">
 <li><p>Create a new chart.</p></li>
@@ -818,19 +898,19 @@ superset run -p <span class="m">8088</span> --with-threads --reload --debugger  
 <p><img alt="superset-add-chart" src="../_images/superset-add-chart.png" /></p>
 <p>Repeat this process to create similar charts for the Senate and President election results.</p>
 <p><em>Note: Yes, I realize that democrats are red and republicans are blue in the Presidential election chart.  To address this, we would probably want to create an additional standardized party field in our tables in order to control how groupings and orderings work.</em></p>
-</div>
-<div class="section" id="creating-dashboards">
-<h3>Creating dashboards<a class="headerlink" href="#creating-dashboards" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="creating-dashboards">
+<h3>Creating dashboards<a class="headerlink" href="#creating-dashboards" title="Permalink to this headline">#</a></h3>
 <p>Dashboards in Superset provide a canvas for assembling charts and other artifacts into a single convenient page that users can view and interact with.  Superset makes it very easy to create a new dashboard and drag-and-drop charts onto the canvas.  Check out <a class="reference external" href="https://docs.preset.io/v1/docs/en/about-dashboards">Preset.io’s documentation</a> on Superset dashboards for further information on how to customize all of the various <a class="reference external" href="https://docs.preset.io/docs/dashboard-features">dashboard features</a>.</p>
 <p>For this tutorial, I simply created a fresh dashboard and dragged each chart we just created onto it.</p>
 <p><img alt="superset-add-dashboard" src="../_images/superset-add-dashboard.png" /></p>
 <p>Once you have your dashboard looking how you want it to, just save it and click on the “Draft” toggle to set the dashboard as published.</p>
 <p><img alt="superset-published-dashboard" src="../_images/superset-published-dashboard.png" /></p>
 <p>This looks like a pretty good start!  From here you can experiment with creating more charts and dashboards.  You may also want to go back to your data model and create additional tables/views that can power other types of charts.  If you are feeling especially bold, you may even want to try adding additional loaders in Meltano and combining multiple data sources in your dbt project.</p>
-</div>
-</div>
-<div class="section" id="wrapping-up">
-<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="wrapping-up">
+<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Permalink to this headline">#</a></h2>
 <p>To recap, in this tutorial we have:</p>
 <ul class="simple">
 <li><p>Installed and configured each piece of the DS4FNP stack.</p></li>
@@ -846,8 +926,8 @@ superset run -p <span class="m">8088</span> --with-threads --reload --debugger  
 <p>While your data pipelines can run only when needed (either triggered or), you will most likely want to have Superset running continuously so that you can acccess it as needed.  In a production environment, this is something you would want to deploy as a managed web service.  Similar to how dbt Cloud offers a hosted service for running dbt, <a class="reference external" href="https://preset.io/">Preset.io</a> offers a hosted service for running Superset.</p>
 <p>The examples we used throughout this tutorial were somewhat oversimplified in order to present a broad overview of the entire stack and process, but subsequent tutorials will drill further down into specific aspects and include additional topics.  Some of these will include configuring CI/CD workflows, more advanced data source extraction, orchestration of workflows with Airflow, designing metrics, and working with cloud warehouses.</p>
 <p>I hope you found this tutorial useful!</p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -871,9 +951,11 @@ superset run -p <span class="m">8088</span> --with-threads --reload --debugger  
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="../README.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -882,24 +964,28 @@ superset run -p <span class="m">8088</span> --with-threads --reload --debugger  
         </div>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Andrew Stewart<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Andrew Stewart<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>
