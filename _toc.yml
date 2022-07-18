@@ -1,4 +1,18 @@
 format: jb-book
 root: README
-chapters:
-- file: tutorials/tutorial-1
+parts:
+  - caption: Tutorials
+    chapters:
+    - file: tutorials/tutorial-1
+  - caption: ELT
+    chapters:
+    - file: notebooks/meltano.md
+  - caption: Data Warehouses
+    chapters:
+    - file: notebooks/postgres.md
+    - file: notebooks/sqlite.md
+    - file: notebooks/duckdb.md
+    - file: notebooks/athena.md    
+  - caption: Orchestration
+    chapters:
+    - file: notebooks/airflow.md

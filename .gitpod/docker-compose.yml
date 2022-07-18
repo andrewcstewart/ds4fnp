@@ -19,3 +19,24 @@ services:
       - .gitpod/postgres:/docker-entrypoint-initdb.d/:ro
     environment:
       POSTGRES_PASSWORD: admin
+
+  dbt-docs:
+    image: nginx
+    ports:
+        - 8000:80
+    volumes:
+        - /workspace/meltano/.meltano/transformers/dbt/target:/usr/share/nginx/html      
+
+  pgweb:
+    container_name: pgweb
+    restart: always
+    image: sosedoff/pgweb
+    ports: 
+      - "8081:8081" 
+    links: 
+      - db:postgres  # my database container is called postgres, not db
+    environment:
+      # - DATABASE_URL=postgres://ds4fnp:ds4fnp@postgres:5432/ds4fnp?sslmode=disable
+      - DATABASE_URL=postgres://postgres:admin@postgres:5432/ds4fnp?sslmode=disable
+    depends_on:
+      - db        
