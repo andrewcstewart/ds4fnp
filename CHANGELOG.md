@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a Ch
 ---
 
 ### New
+* Added placeholder articles for stack components
 * added jb build to .gitpod.yml
 * added CHANGELOG.md
 
