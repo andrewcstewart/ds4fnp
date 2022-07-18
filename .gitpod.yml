@@ -4,6 +4,13 @@ image:
 
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
+  - name: book
+    init: |
+      pip install changelog-cli
+      pip install -U jupyter-book
+    command: |
+      jb build .
+      python -m http.server -d _build/html/
   - name: services
     init: |
       docker-compose -f .gitpod/docker-compose.yml up -d
