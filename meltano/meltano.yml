@@ -6,71 +6,82 @@ plugins:
   - name: tap-spreadsheets-anywhere
     variant: original
     pip_url: git+https://github.com/ets/tap-spreadsheets-anywhere.git
-    capabilities:
-    - catalog
-    - discover
-    - state
     config:
       tables:
       - path: https://dataverse.harvard.edu/api/access/datafile/
         name: mit__house_elections
-        pattern: "4202836"
+        pattern: '4202836'
         start_date: '2010-01-01T00:00:00Z'
         key_properties: []
         format: csv
         delimiter: "\t"
       - path: https://dataverse.harvard.edu/api/access/datafile/
         name: mit__senate_elections
-        pattern: "4300300"
+        pattern: '4300300'
         start_date: '2010-01-01T00:00:00Z'
         key_properties: []
         format: csv
         delimiter: "\t"
       - path: https://dataverse.harvard.edu/api/access/datafile/
         name: mit__president_elections
-        pattern: "4299753"
+        pattern: '4299753'
         start_date: '2010-01-01T00:00:00Z'
         key_properties: []
         format: csv
         delimiter: "\t"
+    capabilities:
+    - catalog
+    - discover
+    - state
   - name: tap-csv
     variant: meltano
     pip_url: git+https://gitlab.com/meltano/tap-csv.git
     config:
       files:
-        - entity: kgl__governors_county_candidate
-          file: ../data/kaggle/governors_county_candidate.csv
-          keys: []
-        - entity: kgl__governors_county
-          file: ../data/kaggle/governors_county.csv
-          keys: []
-        - entity: kgl__governors_state
-          file: ../data/kaggle/governors_state.csv
-          keys: []
-        - entity: kgl__house_candidates
-          file: ../data/kaggle/house_candidates.csv
-          keys: []
-        - entity: kgl__house_state
-          file: ../data/kaggle/house_state.csv
-          keys: []
-        - entity: kgl__president_county_candidate
-          file: ../data/kaggle/president_county_candidate.csv
-          keys: []
-        - entity: kgl__president_county
-          file: ../data/kaggle/president_county.csv
-          keys: []
-        - entity: kgl__president_state
-          file: ../data/kaggle/president_state.csv
-          keys: []
-        - entity: kgl__senate_county_candidate
-          file: ../data/kaggle/senate_county_candidate.csv
-          keys: []
-        - entity: kgl__senate_county
-          file: ../data/kaggle/senate_county.csv
-          keys: []
-        - entity: kgl__senate_state
-          file: ../data/kaggle/senate_state.csv
-          keys: []
+      - entity: kgl__governors_county_candidate
+        file: ../data/kaggle/governors_county_candidate.csv
+        keys: []
+      - entity: kgl__governors_county
+        file: ../data/kaggle/governors_county.csv
+        keys: []
+      - entity: kgl__governors_state
+        file: ../data/kaggle/governors_state.csv
+        keys: []
+      - entity: kgl__house_candidates
+        file: ../data/kaggle/house_candidates.csv
+        keys: []
+      - entity: kgl__house_state
+        file: ../data/kaggle/house_state.csv
+        keys: []
+      - entity: kgl__president_county_candidate
+        file: ../data/kaggle/president_county_candidate.csv
+        keys: []
+      - entity: kgl__president_county
+        file: ../data/kaggle/president_county.csv
+        keys: []
+      - entity: kgl__president_state
+        file: ../data/kaggle/president_state.csv
+        keys: []
+      - entity: kgl__senate_county_candidate
+        file: ../data/kaggle/senate_county_candidate.csv
+        keys: []
+      - entity: kgl__senate_county
+        file: ../data/kaggle/senate_county.csv
+        keys: []
+      - entity: kgl__senate_state
+        file: ../data/kaggle/senate_state.csv
+        keys: []
+  - name: tap-countries
+    namespace: tap_countries
+    pip_url: tap-countries
+    executable: tap-countries
+  - name: tap-exchangeratesapi
+    namespace: tap_exchangeratesapi
+    pip_url: tap-exchangeratesapi
+    executable: tap-exchangeratesapi
+    config:
+      base: AUD
+      start_date: '2017-02-02'
   loaders:
   - name: target-postgres
     pip_url: git+https://github.com/meltano/target-postgres.git
@@ -79,3 +90,60 @@ plugins:
       host: 127.0.0.1
       port: 5432
       dbname: ds4fnp
+  utilities:
+  - name: kedro
+    namespace: kedro
+    pip_url: kedro kedro-viz
+    executable: kedro
+    settings:
+    - name: env
+      value: local
+      description: "Selects which kedro configuration to use (default: local)"
+      documentation: https://kedro.readthedocs.io/en/stable/kedro_project_setup/configuration.html#additional-configuration-environments
+    - name: project_root
+      description: The kedro project root path relative to the meltano project root path.
+      value: utilities/kedro
+    - name: db_username
+      description: Database username
+    - name: db_password
+      description: Database password
+      kind: password
+    - name: db_host
+      description: Database host
+    - name: db_port
+      description: Database port
+    - name: db_database
+      description: Database name
+    - name: source_table 
+      description: Selects which table is used for pipeline input  
+    - name: source_schema
+      description: Selects which schema is used for pipeline input      
+    - name: target_table 
+      description: Selects which table is used for pipeline output      
+    - name: target_schema
+      description: Selects which schema is used for pipeline output
+    - name: target_column
+      description: Selects which column in the source table is the target variable 
+    commands:
+      install:
+        args: install utilities/kedro/src/
+        executable: pip        
+      run: 
+        args: utilities/kedro/run.py
+        executable: python                
+    config:
+      env: local
+      project_root: utilities/kedro
+      db_username: postgres
+      db_password: admin
+      db_host: localhost
+      db_database: ds4fnp
+      source_table: iris
+      source_schema: public
+      target_table: iris_pred
+      target_schema: public
+      target_column: species 
+  - name: pgcli
+    namespace: pgcli
+    pip_url: pgcli
+    executable: pgcli
